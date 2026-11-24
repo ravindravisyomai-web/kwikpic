@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Mail, Lock, User, ArrowRight, Camera, CheckCircle2 } from 'lucide-react';
 
 export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
@@ -10,6 +10,17 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
   const [studioName, setStudioName] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -20,8 +31,14 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202522]/50 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="relative w-full max-w-md rounded-2xl bg-white border border-[#E8EBE7] p-6 sm:p-7 soft-elevated-shadow">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202522]/50 backdrop-blur-xs animate-in fade-in duration-150"
+      onClick={onClose}
+    >
+      <div 
+        className="relative w-full max-w-md rounded-2xl bg-white border border-[#E8EBE7] p-6 sm:p-7 soft-elevated-shadow"
+        onClick={(e) => e.stopPropagation()}
+      >
         
         {/* Close Button */}
         <button

@@ -232,7 +232,7 @@ export const solutionsData = {
     eyebrow: 'FOR CAMPUSES & UNIVERSITIES',
     heroHeadline: 'Every Campus Memory Deserves to Be Remembered.',
     heroSubline: 'Bring school and college event photographs together in organized galleries that make it easier for students, faculty, and families to discover memories.',
-    heroImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=85',
+    heroImage: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=85',
     breadcrumbs: [
       { name: 'Home', href: '/' },
       { name: 'Solutions', href: '/solutions' },
@@ -569,7 +569,7 @@ export const useCasesData = {
     eyebrow: 'USE CASE: CAMPUS GATHERINGS & FESTS',
     heroHeadline: 'Every Campus Celebration. Every Memory. Together.',
     heroSubline: 'Make annual functions, cultural programs, graduation ceremonies, and college festivals easier to share and revisit.',
-    heroImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=85',
+    heroImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=85',
     breadcrumbs: [
       { name: 'Home', href: '/' },
       { name: 'Solutions', href: '/solutions' },

@@ -293,9 +293,9 @@ export default function Navbar({ onOpenAuthModal }) {
                 )}
               </div>
 
-              <a href="/solutions/photographers" className="hover:text-[#202522] transition-colors py-1">
+              <Link to="/solutions/photographers" className="hover:text-[#202522] transition-colors py-1">
                 For Photographers
-              </a>
+              </Link>
 
               <a href="/#pricing" className="hover:text-[#202522] transition-colors py-1">
                 Pricing
@@ -328,6 +328,7 @@ export default function Navbar({ onOpenAuthModal }) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="xl:hidden p-2 text-[#202522] hover:bg-[#F7F8F6] rounded-lg focus:outline-none"
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -362,6 +363,7 @@ export default function Navbar({ onOpenAuthModal }) {
               <button
                 onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
                 className="w-full py-2 flex items-center justify-between text-sm font-bold text-[#202522]"
+                aria-expanded={mobileSolutionsOpen}
               >
                 <span>Solutions</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mobileSolutionsOpen ? 'rotate-180 text-[#648B72]' : ''}`} />
