@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { initGlobalScrollTriggers, ScrollTrigger } from './utils/gsapScroll';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustSection from './components/TrustSection';
 import ProductShowcase from './components/ProductShowcase';
 import AiFaceRecognition from './components/AiFaceRecognition';
 import QrCodeSharing from './components/QrCodeSharing';
@@ -34,13 +33,10 @@ function HomePage({ onOpenAuthModal, onOpenImageModal }) {
 
   return (
     <main ref={homeRef} className="overflow-hidden">
-      {/* 1. Full-Width Typography Hero with GSAP entrance and mouse waves */}
+      {/* 1. Full-Width Typography Hero with GSAP entrance and living memories */}
       <Hero onOpenAuthModal={onOpenAuthModal} />
 
-      {/* 2. Verified Trust Metrics & Studio Partners */}
-      <TrustSection />
-
-      {/* 3. Interactive Product Showcase */}
+      {/* 2. Interactive Product Showcase */}
       <ProductShowcase
         onOpenAuthModal={onOpenAuthModal}
         onOpenImageModal={onOpenImageModal}
