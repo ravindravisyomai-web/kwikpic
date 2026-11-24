@@ -28,32 +28,26 @@ export default function QrCodeSharing({ onOpenAuthModal }) {
   const workflowSteps = [
     {
       num: '01',
-      title: 'Scan Event QR Code',
-      description: 'Point your Android camera at the acrylic event QR standee.',
+      title: 'Scan Event QR Standee',
+      description: 'Point your camera at acrylic table standees or venue entrance banners to access the gallery in seconds.',
       screenIndex: 0,
     },
     {
       num: '02',
-      title: 'Instant Browser Experience',
-      description: 'Open the event gallery through Android Chrome without installing an app.',
-      screenIndex: 0,
-    },
-    {
-      num: '03',
-      title: 'Take a Selfie',
-      description: 'Capture or select a selfie through the supported guest workflow.',
+      title: 'Instant Front-Camera Selfie',
+      description: 'Capture a quick selfie in your mobile browser with zero app installation or account signup required.',
       screenIndex: 1,
     },
     {
-      num: '04',
-      title: 'View Matched Photographs',
-      description: 'Discover the photographs identified in your personalized gallery.',
+      num: '03',
+      title: 'Browse Your Matched Moments',
+      description: 'Neural face matching filters through thousands of event photos to assemble your personal collection.',
       screenIndex: 2,
     },
     {
-      num: '05',
-      title: 'Download Your Memories',
-      description: 'Access and download available photographs directly to your device.',
+      num: '04',
+      title: '1-Tap Full-Resolution Downloads',
+      description: 'Save individual favorites or download your entire memory collection directly to your device storage.',
       screenIndex: 3,
     },
   ];

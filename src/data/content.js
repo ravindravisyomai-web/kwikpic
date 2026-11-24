@@ -155,56 +155,56 @@ export const verifiedStats = [
 
 export const photographerFeatures = [
   {
-    id: 'ai-matching',
-    badge: 'Core Intelligence',
-    title: 'AI Neural Face Matching That Never Fails',
-    description: 'Guests simply take one selfie from their phone. Our proprietary edge neural model scans 15,000+ event photos in under 3 seconds to assemble their private, personalized memory book.',
-    bullets: [
-      'Works in low-light, sunglasses, traditional wedding turbans, & partial side profiles',
-      'Zero download required for guests — pure browser-based web application',
-      'GDPR and privacy-first architecture with instant guest opt-out'
-    ],
-    metric: '99.4% Match Accuracy',
-    metricSubtitle: 'Tested on 500,000+ guest faces'
-  },
-  {
     id: 'bulk-upload',
-    badge: 'Pro Workflow',
+    badge: 'High-Speed Ingestion',
     title: 'Lightning Bulk & Nested Folder Uploads',
-    description: 'Upload 50GB+ camera RAW or high-resolution JPEGs directly from SD cards without waiting. Intelligent parallel chunking with automatic resume on wifi drops.',
+    description: 'Upload 50GB+ camera RAW or high-resolution JPEGs directly from SD cards without waiting. Intelligent parallel chunking automatically resumes if connectivity drops.',
     bullets: [
-      'Preserves full camera EXIF metadata, timestamp order, and custom ratings',
-      'One-shot folder upload maintains your sub-event folders (Haldi, Reception, Party)',
-      'Background cloud optimization produces web-ready previews instantly'
+      'Preserves complete camera EXIF metadata, timestamp order, and custom ratings',
+      'One-shot folder upload maintains your sub-event folders (Mehendi, Haldi, Reception)',
+      'Background cloud optimization produces web-ready previews in seconds'
     ],
     metric: '10x Faster Uploads',
     metricSubtitle: 'Direct-to-cloud multi-thread pipeline'
   },
   {
-    id: 'qr-experience',
-    badge: 'Guest Delight',
-    title: 'One-Scan QR Codes with Instant Branded Experience',
-    description: 'Place smart QR standees on wedding dining tables, entrance archways, or corporate badges. Guests scan and are instantly greeted by your photography brand logo and event theme.',
-    bullets: [
-      'Download print-ready high-DPI acrylic standee & tent-card designs in 1 click',
-      'Custom branded domain & logo integration for complete studio ownership',
-      'Real-time live photo stream updating as your team shoots and uploads'
-    ],
-    metric: '88% Scan-to-Find Rate',
-    metricSubtitle: 'Highest event guest engagement in industry'
-  },
-  {
     id: 'client-proofing',
     badge: 'Studio Monetization',
-    title: 'Client Album Proofing & Seamless Selections',
-    description: 'Empower couples and families to shortlist album selects, heart favorites, add specific retouching notes, and finalize print albums without chaotic WhatsApp links or pen-and-paper lists.',
+    title: 'Client Album Proofing & 1-Click Lightroom Export',
+    description: 'Empower couples and clients to shortlist favorites, heart selects, add specific retouching instructions, and approve final albums without chaotic WhatsApp links.',
     bullets: [
-      'Granular download permissions (Web resolution vs. Full 300 DPI Original)',
-      'Built-in customizable watermarking (Dynamic diagonal, bottom corner, or subtle center tile)',
-      'Automated selection export directly compatible with Adobe Lightroom & Photoshop'
+      'Interactive selection portal with real-time feedback and photo favoriting',
+      'Granular download permissions (Social web-res vs. Full 300 DPI Master Original)',
+      '1-Click export of approved photo filenames directly into Adobe Lightroom or Photoshop'
     ],
     metric: '7 Days Saved',
     metricSubtitle: 'Cut typical album proofing turnaround by 75%'
+  },
+  {
+    id: 'studio-branding',
+    badge: 'Brand Ownership',
+    title: 'White-Label Branding & Custom Studio Domains',
+    description: 'Deliver a high-end studio client experience. Map your custom domain, embed your brand logo, and position dynamic watermarks with adjustable opacity.',
+    bullets: [
+      'Custom domain mapping (e.g., photos.yourstudio.com) for 100% brand ownership',
+      'Dynamic watermarking (diagonal tile, bottom corner, or subtle logo overlay)',
+      'Automatic watermark removal upon client purchase or approval rights'
+    ],
+    metric: '100% White-Label',
+    metricSubtitle: 'Your brand remains front and center'
+  },
+  {
+    id: 'lossless-storage',
+    badge: 'Enterprise Security',
+    title: 'Lossless Master RAW Storage & Granular Access Control',
+    description: 'Preserve high-resolution master files and RAW originals in secure cloud storage while controlling exactly what guests, clients, and vendors can view and download.',
+    bullets: [
+      'Lossless master compression preserves full 300 DPI original print quality',
+      'Set separate permissions for guests (social downloads) and clients (full masters)',
+      'GDPR-compliant security with automated data retention and instant client opt-out'
+    ],
+    metric: 'Zero Quality Loss',
+    metricSubtitle: 'Up to 50MB per photograph preserved'
   }
 ];
 

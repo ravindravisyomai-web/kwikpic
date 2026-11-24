@@ -8,13 +8,13 @@ import TrustSection from './components/TrustSection';
 import ProductShowcase from './components/ProductShowcase';
 import AiFaceRecognition from './components/AiFaceRecognition';
 import QrCodeSharing from './components/QrCodeSharing';
-import PhotographerFeatures from './components/PhotographerFeatures';
 import HowItWorks from './components/HowItWorks';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import SolutionsShowcase from './components/SolutionsShowcase';
 import SolutionsHub from './pages/SolutionsHub';
 import SolutionsPage from './pages/SolutionsPage';
 import UseCasesPage from './pages/UseCasesPage';
@@ -46,31 +46,31 @@ function HomePage({ onOpenAuthModal, onOpenImageModal }) {
         onOpenImageModal={onOpenImageModal}
       />
 
-      {/* 4. AI Face Recognition Section */}
+      {/* 4. How It Works 4-Step Timeline (Macroscopic Workflow) */}
+      <HowItWorks onOpenAuthModal={onOpenAuthModal} />
+
+      {/* 5. AI Face Recognition Section (Deep Dive: Guest Discovery) */}
       <AiFaceRecognition
         onOpenAuthModal={onOpenAuthModal}
         onOpenImageModal={onOpenImageModal}
       />
 
-      {/* 5. Instant QR Code Photo Sharing with Android Preview */}
+      {/* 6. Instant QR Code Photo Sharing with Android Preview (Deep Dive: On-Site Access) */}
       <QrCodeSharing onOpenAuthModal={onOpenAuthModal} />
 
-      {/* 6. Photographer Feature Blocks (Alternating Layout) */}
-      <PhotographerFeatures onOpenAuthModal={onOpenAuthModal} />
-
-      {/* 7. How It Works 4-Step Timeline */}
-      <HowItWorks onOpenAuthModal={onOpenAuthModal} />
-
-      {/* 8. Minimal Pricing Plans */}
-      <Pricing onOpenAuthModal={onOpenAuthModal} />
+      {/* 7. Solutions & Use Cases Showcase (Industry & Event Verticals) */}
+      <SolutionsShowcase />
 
       {/* 9. Verified Testimonials Carousel */}
       <Testimonials />
 
-      {/* 10. Chat-Pill FAQ Accordion */}
+      {/* 10. Minimal Pricing Plans */}
+      <Pricing onOpenAuthModal={onOpenAuthModal} />
+
+      {/* 11. Chat-Pill FAQ Accordion */}
       <FAQ />
 
-      {/* 11. Final Conversion CTA */}
+      {/* 12. Final Conversion CTA */}
       <FinalCTA onOpenAuthModal={onOpenAuthModal} />
     </main>
   );

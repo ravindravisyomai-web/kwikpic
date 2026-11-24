@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { solutionsData } from '../data/solutionsData';
 import AndroidDeviceFrame from '../components/AndroidDeviceFrame';
+import PhotographerFeatures from '../components/PhotographerFeatures';
 import { initGlobalScrollTriggers, ScrollTrigger } from '../utils/gsapScroll';
 import { 
   ArrowRight, 
@@ -222,6 +223,11 @@ export default function SolutionsPage({ onOpenAuthModal, onOpenImageModal }) {
           </div>
         </div>
       </section>
+
+      {/* 3.5. DEDICATED STUDIO OPERATIONS ENGINE (PHOTOGRAPHERS & STUDIOS) */}
+      {(slug === 'photographers' || (!slug && data.slug === 'photographers')) && (
+        <PhotographerFeatures onOpenAuthModal={onOpenAuthModal} />
+      )}
 
       {/* 4. WORKFLOW PIPELINE */}
       <section id="workflow" className="py-20 bg-[#FFFFFF]">

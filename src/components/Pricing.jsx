@@ -8,7 +8,7 @@ export default function Pricing({ onOpenAuthModal }) {
   return (
     <section id="pricing" className="py-24 bg-[#F7F8F6] border-y border-[#E8EBE7] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header with Viewport Entrance */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12 gsap-fade-up">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#648B72]">
@@ -31,9 +31,8 @@ export default function Pricing({ onOpenAuthModal }) {
               className="w-11 h-6 bg-[#E8EBE7] rounded-full p-1 relative transition-colors focus:outline-none cursor-pointer"
             >
               <div
-                className={`w-4 h-4 bg-[#202522] rounded-full transition-transform ${
-                  billingCycle === 'yearly' ? 'translate-x-5' : 'translate-x-0'
-                }`}
+                className={`w-4 h-4 bg-[#202522] rounded-full transition-transform ${billingCycle === 'yearly' ? 'translate-x-5' : 'translate-x-0'
+                  }`}
               />
             </button>
             <span className={`text-xs font-medium flex items-center gap-1.5 ${billingCycle === 'yearly' ? 'text-[#202522] font-semibold' : 'text-[#737873]'}`}>
@@ -50,11 +49,10 @@ export default function Pricing({ onOpenAuthModal }) {
             return (
               <div key={idx} className="gsap-stagger-item h-full">
                 <div
-                  className={`bg-white rounded-2xl p-7 border flex flex-col justify-between relative soft-card-shadow h-full transition-all duration-300 hover:-translate-y-1.5 ${
-                    plan.recommended
-                      ? 'border-[#202522] ring-1 ring-[#202522] shadow-[0_15px_35px_-10px_rgba(32,37,34,0.1)]'
-                      : 'border-[#E8EBE7]'
-                  }`}
+                  className={`bg-white rounded-2xl p-7 border flex flex-col justify-between relative soft-card-shadow h-full transition-all duration-300 hover:-translate-y-1.5 ${plan.recommended
+                    ? 'border-[#202522] ring-1 ring-[#202522] shadow-[0_15px_35px_-10px_rgba(32,37,34,0.1)]'
+                    : 'border-[#E8EBE7]'
+                    }`}
                 >
                   {plan.recommended && (
                     <div className="absolute -top-3 left-6 bg-[#202522] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-xs">
@@ -99,11 +97,10 @@ export default function Pricing({ onOpenAuthModal }) {
                   <div className="pt-6 mt-6 border-t border-[#E8EBE7]">
                     <button
                       onClick={() => onOpenAuthModal('signup')}
-                      className={`w-full py-2.5 rounded-lg font-semibold text-xs transition-all cursor-pointer ${
-                        plan.recommended
-                          ? 'bg-[#202522] hover:bg-[#333A36] text-white shadow-xs'
-                          : 'bg-[#F7F8F6] hover:bg-[#ECEEEA] text-[#202522] border border-[#E8EBE7]'
-                      }`}
+                      className={`w-full py-2.5 rounded-lg font-semibold text-xs transition-all cursor-pointer ${plan.recommended
+                        ? 'bg-[#202522] hover:bg-[#333A36] text-white shadow-xs'
+                        : 'bg-[#F7F8F6] hover:bg-[#ECEEEA] text-[#202522] border border-[#E8EBE7]'
+                        }`}
                     >
                       {plan.cta}
                     </button>
