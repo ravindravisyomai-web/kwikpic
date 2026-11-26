@@ -72,6 +72,18 @@ export default function Navbar({ onOpenAuthModal }) {
     setSolutionsMegaOpen(false);
   }, [location.pathname]);
 
+  // Close menus on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+        setSolutionsMegaOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -177,8 +189,8 @@ export default function Navbar({ onOpenAuthModal }) {
             {/* DESKTOP NAVIGATION WITH SINGLE UNIFIED SOLUTIONS MEGA MENU */}
             <nav className="hidden xl:flex items-center gap-8 text-xs font-medium text-[#666666]">
               
-              <a
-                href="/#features"
+              <Link
+                to="/#features"
                 className={`transition-colors py-1 relative ${
                   activeSection === 'features'
                     ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
@@ -186,10 +198,10 @@ export default function Navbar({ onOpenAuthModal }) {
                 }`}
               >
                 Features
-              </a>
+              </Link>
 
-              <a
-                href="/#how-it-works"
+              <Link
+                to="/#how-it-works"
                 className={`transition-colors py-1 relative ${
                   activeSection === 'how-it-works'
                     ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
@@ -197,13 +209,19 @@ export default function Navbar({ onOpenAuthModal }) {
                 }`}
               >
                 How It Works
-              </a>
+              </Link>
 
               {/* SINGLE UNIFIED SOLUTIONS NAVIGATION ITEM WITH TWO-COLUMN MEGA MENU */}
               <div 
                 className="relative"
                 onMouseEnter={() => setSolutionsMegaOpen(true)}
                 onMouseLeave={() => setSolutionsMegaOpen(false)}
+                onFocus={() => setSolutionsMegaOpen(true)}
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget)) {
+                    setSolutionsMegaOpen(false);
+                  }
+                }}
               >
                 <Link
                   to="/solutions"
@@ -249,7 +267,7 @@ export default function Navbar({ onOpenAuthModal }) {
                         
                         {/* LEFT COLUMN: SOLUTIONS BY INDUSTRY */}
                         <div className="col-span-5 space-y-3">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block mb-2">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#666666] block mb-2">
                             SOLUTIONS BY INDUSTRY
                           </span>
 
@@ -292,7 +310,7 @@ export default function Navbar({ onOpenAuthModal }) {
 
                         {/* RIGHT COLUMN: SOLUTIONS BY EVENT (USE CASES) */}
                         <div className="col-span-7 space-y-3 pl-3 border-l border-[#E8E8E8]">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block mb-2">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#666666] block mb-2">
                             SOLUTIONS BY EVENT
                           </span>
 
@@ -364,8 +382,8 @@ export default function Navbar({ onOpenAuthModal }) {
                 For Photographers
               </Link>
 
-              <a
-                href="/#pricing"
+              <Link
+                to="/#pricing"
                 className={`transition-colors py-1 relative ${
                   activeSection === 'pricing'
                     ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
@@ -373,10 +391,10 @@ export default function Navbar({ onOpenAuthModal }) {
                 }`}
               >
                 Pricing
-              </a>
+              </Link>
 
-              <a
-                href="/#faq"
+              <Link
+                to="/#faq"
                 className={`transition-colors py-1 relative ${
                   activeSection === 'faq'
                     ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
@@ -384,7 +402,7 @@ export default function Navbar({ onOpenAuthModal }) {
                 }`}
               >
                 FAQ
-              </a>
+              </Link>
             </nav>
 
             {/* RIGHT: Sign In & Primary CTA */}
@@ -423,20 +441,20 @@ export default function Navbar({ onOpenAuthModal }) {
           <div className="space-y-4 pt-2">
             
             <div className="flex flex-col space-y-1 border-b border-[#E8E8E8] pb-3">
-              <a 
-                href="/#features" 
+              <Link 
+                to="/#features" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828] transition-colors"
               >
                 Features
-              </a>
-              <a 
-                href="/#how-it-works" 
+              </Link>
+              <Link 
+                to="/#how-it-works" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828] transition-colors"
               >
                 How It Works
-              </a>
+              </Link>
             </div>
 
             {/* UNIFIED SOLUTIONS MOBILE ACCORDION */}
@@ -454,7 +472,7 @@ export default function Navbar({ onOpenAuthModal }) {
                 <div className="pl-2 py-2 space-y-4">
                   {/* Category 1: By Industry */}
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888]">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#666666]">
                       BY INDUSTRY
                     </span>
                     {industrySolutions.map((sol) => (
@@ -471,7 +489,7 @@ export default function Navbar({ onOpenAuthModal }) {
 
                   {/* Category 2: By Event */}
                   <div className="space-y-1.5 pt-2 border-t border-[#E8E8E8]/60">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888]">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#666666]">
                       BY EVENT
                     </span>
                     {eventSolutions.map((uc) => (
@@ -505,20 +523,20 @@ export default function Navbar({ onOpenAuthModal }) {
               >
                 For Photographers
               </Link>
-              <a 
-                href="/#pricing" 
+              <Link 
+                to="/#pricing" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828]"
               >
                 Pricing
-              </a>
-              <a 
-                href="/#faq" 
+              </Link>
+              <Link 
+                to="/#faq" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828]"
               >
                 FAQ
-              </a>
+              </Link>
             </div>
 
           </div>

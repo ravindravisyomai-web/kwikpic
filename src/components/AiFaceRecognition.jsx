@@ -45,8 +45,13 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
     }
   ];
 
-  // Automatic 4-Second Progression Timer (0 -> 1 -> 2 -> 3 -> 0 infinite loop)
+  // Automatic 4-Second Progression Timer (0 -> 1 -> 2 -> 3 -> 0), respecting reduced motion
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 4);
     }, 4000);
@@ -91,9 +96,18 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
           {/* LEFT: INTERACTIVE ACRYLIC QR STANDEE */}
           <div className="lg:col-span-3 flex flex-col items-center text-center gsap-fade-up">
             <div
+              role="button"
+              tabIndex={0}
+              aria-label="Preview QR Standee scan step"
               onMouseEnter={() => setStandeeHovered(true)}
               onMouseLeave={() => setStandeeHovered(false)}
               onClick={() => handleSelectStep(0)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSelectStep(0);
+                }
+              }}
               className={`w-64 max-w-full bg-white rounded-3xl p-6 border transition-all duration-300 cursor-pointer relative overflow-hidden ${
                 activeStep === 0 || standeeHovered
                   ? 'border-[#C62828] shadow-[0_20px_45px_-12px_rgba(198,40,40,0.14)] -translate-y-1 ring-1 ring-[#C62828]'
@@ -386,7 +400,16 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
               return (
                 <div
                   key={step.num}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isCurrent}
                   onClick={() => handleSelectStep(step.screenIndex)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleSelectStep(step.screenIndex);
+                    }
+                  }}
                   className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer ${
                     isCurrent
                       ? 'bg-[#FFF5F5]/70 border-[#C62828] shadow-xs ring-1 ring-[#C62828]'
@@ -396,7 +419,7 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
                   <div className="flex items-start gap-3">
                     <span
                       className={`text-xs font-bold font-serif shrink-0 mt-0.5 ${
-                        isCurrent ? 'text-[#C62828]' : 'text-[#888888]'
+                        isCurrent ? 'text-[#C62828]' : 'text-[#666666]'
                       }`}
                     >
                       {step.num}

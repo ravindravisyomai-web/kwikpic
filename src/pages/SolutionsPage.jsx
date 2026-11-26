@@ -3,27 +3,33 @@ import { useParams, Link } from 'react-router-dom';
 import { solutionsData } from '../data/solutionsData';
 import AndroidDeviceFrame from '../components/AndroidDeviceFrame';
 import PhotographerFeatures from '../components/PhotographerFeatures';
+import { FaqChatList } from '../components/FAQ';
+import NotFoundPage from './NotFoundPage';
 import { initGlobalScrollTriggers, ScrollTrigger } from '../utils/gsapScroll';
 import { 
   ArrowRight, 
-  ChevronRight,
-  ChevronDown
+  ChevronRight
 } from 'lucide-react';
 import { samplePhotos } from '../data/content';
 
 export default function SolutionsPage({ onOpenAuthModal, onOpenImageModal }) {
   const { slug } = useParams();
-  const data = solutionsData[slug] || solutionsData['photographers'];
-  const [openFaq, setOpenFaq] = React.useState(0);
+  const data = solutionsData[slug];
   const pageRef = useRef(null);
 
   useEffect(() => {
+    if (!data) return;
+    document.title = `${data.title} | Lumina Solutions`;
     const cleanup = initGlobalScrollTriggers(pageRef);
     return () => {
       cleanup();
       ScrollTrigger.refresh();
     };
-  }, [slug]);
+  }, [slug, data]);
+
+  if (!data) {
+    return <NotFoundPage />;
+  }
 
   return (
     <div ref={pageRef} className="pt-24 pb-20 bg-[#FFFFFF] min-h-screen overflow-hidden">
@@ -169,20 +175,20 @@ export default function SolutionsPage({ onOpenAuthModal, onOpenImageModal }) {
                   </div>
 
                   <div>
-                    <span className="text-[9px] text-[#888888] uppercase font-semibold">Specialized Portal</span>
+                    <span className="text-[9px] text-[#666666] uppercase font-semibold">Specialized Portal</span>
                     <h5 className="text-xs font-bold text-[#202020]">{data.title} Experience</h5>
                     <p className="text-[10px] text-[#C62828]">Automated guest delivery enabled</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <div className="relative rounded-xl overflow-hidden aspect-square border border-[#E8E8E8]">
-                      <img src={samplePhotos.gallery[0].url} alt="t" className="w-full h-full object-cover" />
+                      <img src={samplePhotos.gallery[0].url} alt={samplePhotos.gallery[0].title} className="w-full h-full object-cover" />
                       <span className="absolute bottom-1 right-1 bg-white/90 text-[8px] font-bold text-[#202020] px-1 rounded shadow-xs">
                         99.4%
                       </span>
                     </div>
                     <div className="relative rounded-xl overflow-hidden aspect-square border border-[#E8E8E8]">
-                      <img src={samplePhotos.gallery[1].url} alt="t" className="w-full h-full object-cover" />
+                      <img src={samplePhotos.gallery[1].url} alt={samplePhotos.gallery[1].title} className="w-full h-full object-cover" />
                       <span className="absolute bottom-1 right-1 bg-white/90 text-[8px] font-bold text-[#202020] px-1 rounded shadow-xs">
                         99.8%
                       </span>
@@ -250,34 +256,17 @@ export default function SolutionsPage({ onOpenAuthModal, onOpenImageModal }) {
 
       {/* 5. FAQ */}
       <section className="py-20 bg-[#FAFAFA] border-y border-[#E8E8E8]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-3 mb-12 gsap-fade-up">
+            <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+              FAQs
+            </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#202020]">
               Frequently Asked Questions
             </h2>
           </div>
 
-          <div className="space-y-3 gsap-stagger-group">
-            {data.faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div key={idx} className={`bg-white rounded-xl border overflow-hidden soft-card-shadow gsap-stagger-item transition-colors ${isOpen ? 'border-[#C62828]' : 'border-[#E8E8E8]'}`}>
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? -1 : idx)}
-                    className="w-full text-left p-5 flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
-                  >
-                    <span className="font-bold text-xs sm:text-sm text-[#202020]">{faq.q}</span>
-                    <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#C62828]' : 'text-[#666666]'}`} />
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-xs text-[#666666] leading-relaxed border-t border-[#E8E8E8] pt-3 animate-in fade-in duration-200">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <FaqChatList items={data.faqs} inactiveBg="bg-white" />
         </div>
       </section>
 

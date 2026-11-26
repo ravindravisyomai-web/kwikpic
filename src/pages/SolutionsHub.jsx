@@ -13,6 +13,7 @@ export default function SolutionsHub({ onOpenAuthModal }) {
   const hubRef = useRef(null);
 
   useEffect(() => {
+    document.title = 'Solutions & Event Use Cases | Lumina';
     const cleanup = initGlobalScrollTriggers(hubRef);
     return () => {
       cleanup();

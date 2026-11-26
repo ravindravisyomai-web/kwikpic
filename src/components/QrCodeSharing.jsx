@@ -170,7 +170,7 @@ export default function QrCodeSharing({ onOpenAuthModal }) {
 
                     <div className="grid grid-cols-3 gap-1.5">
                       {samplePhotos.gallery.slice(0, 3).map((p, idx) => (
-                        <img key={idx} src={p.url} alt="t" className="rounded-lg aspect-square object-cover border border-[#E8E8E8]" />
+                        <img key={idx} src={p.url} alt={p.title} className="rounded-lg aspect-square object-cover border border-[#E8E8E8]" />
                       ))}
                     </div>
                   </div>

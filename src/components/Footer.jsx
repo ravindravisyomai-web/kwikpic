@@ -49,7 +49,6 @@ export default function Footer({ onOpenAuthModal }) {
 
           {/* Left Column: Brand Statement, Live Status & Social Icons */}
           <div className="md:col-span-4 space-y-6">
-
             <div className="space-y-3 text-xs text-[#888888] leading-relaxed max-w-sm">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-md bg-[#C62828] flex items-center justify-center text-white shadow-xs">
@@ -160,10 +159,10 @@ export default function Footer({ onOpenAuthModal }) {
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Platform</h4>
               <ul className="space-y-2.5 text-xs text-[#888888]">
-                <li><a href="/#features" className="hover:text-white transition-colors">Product Showcase</a></li>
-                <li><a href="/#how-it-works" className="hover:text-white transition-colors">How It Works</a></li>
-                <li><a href="/#ai-matching" className="hover:text-white transition-colors">AI Face Recognition</a></li>
-                <li><a href="/#pricing" className="hover:text-white transition-colors">Pricing Plans</a></li>
+                <li><Link to="/#features" className="hover:text-white transition-colors">Product Showcase</Link></li>
+                <li><Link to="/#how-it-works" className="hover:text-white transition-colors">How It Works</Link></li>
+                <li><Link to="/#ai-matching" className="hover:text-white transition-colors">AI Face Recognition</Link></li>
+                <li><Link to="/#pricing" className="hover:text-white transition-colors">Pricing Plans</Link></li>
               </ul>
             </div>
 
@@ -171,7 +170,7 @@ export default function Footer({ onOpenAuthModal }) {
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Support</h4>
               <ul className="space-y-2.5 text-xs text-[#888888]">
-                <li><a href="/#faq" className="hover:text-white transition-colors">FAQs</a></li>
+                <li><Link to="/#faq" className="hover:text-white transition-colors">FAQs</Link></li>
                 <li><a href="mailto:support@lumina.ai" className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-[#E05252]" /><span>Contact Support</span></a></li>
                 <li>
                   <button onClick={() => onOpenAuthModal && onOpenAuthModal('login')} className="hover:text-white transition-colors cursor-pointer text-left">
@@ -183,16 +182,14 @@ export default function Footer({ onOpenAuthModal }) {
                     Create Free Account
                   </button>
                 </li>
-                <li><span className="text-[#666666]">Privacy & GDPR Compliant</span></li>
+                <li><span className="text-[#9A9A9E]">Privacy &amp; GDPR Compliant</span></li>
               </ul>
             </div>
-
           </div>
-
         </div>
 
         {/* 3. BOTTOM BAR: Copyright & Back to top button */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9A9A9E]">
 
           <div className="flex flex-wrap items-center gap-3">
             <span>© {new Date().getFullYear()} Lumina Technologies Inc. All rights reserved.</span>

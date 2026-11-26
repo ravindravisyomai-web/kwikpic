@@ -2,16 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Camera, CheckCircle2 } from 'lucide-react';
 
 export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
-  if (!isOpen) return null;
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [studioName, setStudioName] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Close on Escape key
+  // Reset form submission state when modal opens/closes or mode changes
   useEffect(() => {
+    if (!isOpen) {
+      setSubmitted(false);
+    }
+  }, [isOpen, mode]);
+
+  // Close on Escape key only while modal is open
+  useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose();
@@ -19,30 +25,42 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [isOpen, onClose]);
+
+  // Auto-close after submission with proper cleanup
+  useEffect(() => {
+    if (!submitted) return;
+    const timer = setTimeout(() => {
+      setSubmitted(false);
+      onClose();
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, [submitted, onClose]);
+
+  if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-    }, 1800);
   };
 
   return (
-    <div 
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202020]/50 backdrop-blur-xs animate-in fade-in duration-150"
       onClick={onClose}
     >
-      <div 
+      <div
         className="relative w-full max-w-md rounded-2xl bg-white border border-[#E8E8E8] p-6 sm:p-7 soft-elevated-shadow"
         onClick={(e) => e.stopPropagation()}
       >
-        
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
+          aria-label="Close authentication modal"
           className="absolute top-4 right-4 p-1.5 rounded-lg text-[#666666] hover:text-[#202020] hover:bg-[#F7F7F7] transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
@@ -63,7 +81,7 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
             <div className="w-10 h-10 rounded-full bg-[#43866A]/15 text-[#43866A] flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-5 h-5" />
             </div>
-            <h4 className="text-base font-bold text-[#202020]">
+            <h4 id="auth-modal-title" className="text-base font-bold text-[#202020]">
               {mode === 'login' ? 'Welcome Back' : 'Account Ready'}
             </h4>
             <p className="text-xs text-[#666666]">
@@ -72,7 +90,7 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
           </div>
         ) : (
           <div>
-            <h3 className="text-lg font-bold text-[#202020] mb-1">
+            <h3 id="auth-modal-title" className="text-lg font-bold text-[#202020] mb-1">
               {mode === 'login' ? 'Sign In to Studio Workspace' : 'Create Photographer Account'}
             </h3>
             <p className="text-xs text-[#666666] mb-5">
@@ -85,52 +103,65 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
               {mode === 'signup' && (
                 <>
                   <div>
-                    <label className="block text-xs font-semibold text-[#202020] mb-1">Full Name</label>
+                    <label htmlFor="auth-full-name" className="block text-xs font-semibold text-[#202020] mb-1">
+                      Full Name
+                    </label>
                     <input
+                      id="auth-full-name"
                       type="text"
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Arjun Kapoor"
-                      className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#888888] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
+                      className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#666666] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#202020] mb-1">Studio / Brand Name</label>
+                    <label htmlFor="auth-studio-name" className="block text-xs font-semibold text-[#202020] mb-1">
+                      Studio / Brand Name
+                    </label>
                     <input
+                      id="auth-studio-name"
                       type="text"
                       required
                       value={studioName}
                       onChange={(e) => setStudioName(e.target.value)}
                       placeholder="e.g. Luminary Wedding Films"
-                      className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#888888] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
+                      className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#666666] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
                     />
                   </div>
                 </>
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-[#202020] mb-1">Email Address</label>
+                <label htmlFor="auth-email" className="block text-xs font-semibold text-[#202020] mb-1">
+                  Email Address
+                </label>
                 <input
+                  id="auth-email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@studio.com"
-                  className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#888888] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
+                  className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#666666] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#202020] mb-1">Password</label>
+                <label htmlFor="auth-password" className="block text-xs font-semibold text-[#202020] mb-1">
+                  Password
+                </label>
                 <input
+                  id="auth-password"
                   type="password"
                   required
+                  minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#888888] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
+                  className="w-full px-3 py-2 bg-[#F7F7F7] border border-[#E8E8E8] rounded-lg text-xs text-[#202020] placeholder-[#666666] focus:outline-none focus:border-[#C62828] focus:bg-white transition-colors"
                 />
               </div>
 
@@ -146,8 +177,9 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
             <div className="mt-5 text-center text-xs text-[#666666]">
               {mode === 'login' ? (
                 <p>
-                  Don't have an account?{' '}
+                  Don&apos;t have an account?{' '}
                   <button
+                    type="button"
                     onClick={() => onSwitchMode('signup')}
                     className="text-[#C62828] font-semibold hover:underline cursor-pointer"
                   >
@@ -158,6 +190,7 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
                 <p>
                   Already have an account?{' '}
                   <button
+                    type="button"
                     onClick={() => onSwitchMode('login')}
                     className="text-[#C62828] font-semibold hover:underline cursor-pointer"
                   >
@@ -168,31 +201,62 @@ export function AuthModal({ isOpen, mode, onClose, onSwitchMode }) {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );
 }
 
 export function ImageModal({ photo, onClose }) {
+  useEffect(() => {
+    if (!photo) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [photo, onClose]);
+
   if (!photo) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202020]/80 backdrop-blur-xs animate-in fade-in duration-150" onClick={onClose}>
-      <div className="relative max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden bg-white border border-[#E8E8E8] p-2 soft-elevated-shadow" onClick={(e) => e.stopPropagation()}>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={photo.title || photo.tag || 'Event photo preview'}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202020]/80 backdrop-blur-xs animate-in fade-in duration-150"
+      onClick={onClose}
+    >
+      <div
+        className="relative max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden bg-white border border-[#E8E8E8] p-2 soft-elevated-shadow"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
+          type="button"
           onClick={onClose}
+          aria-label="Close image preview"
           className="absolute top-4 right-4 z-10 p-1.5 rounded-full bg-white/90 text-[#202020] hover:bg-white transition-colors shadow-xs cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
-        <img src={photo.url} alt={photo.title} className="max-w-full max-h-[80vh] object-contain rounded-xl" />
-        <div className="p-3 flex items-center justify-between text-xs">
+        <img
+          src={photo.url}
+          alt={photo.title || photo.tag || 'Event photograph'}
+          className="max-w-full max-h-[80vh] object-contain rounded-xl bg-[#F7F7F7]"
+        />
+        <div className="p-3 flex items-center justify-between text-xs gap-4">
           <div>
-            <h4 className="font-bold text-[#202020]">{photo.title}</h4>
-            <p className="text-[#666666]">{photo.location} • {photo.category}</p>
+            <h4 className="font-bold text-[#202020]">{photo.title || photo.tag}</h4>
+            <p className="text-[#666666]">
+              {[photo.location, photo.category || photo.time].filter(Boolean).join(' • ')}
+            </p>
           </div>
-          <span className="text-[#C62828] font-semibold">{photo.matches} Matches</span>
+          {(photo.matches || photo.confidence) && (
+            <span className="text-[#C62828] font-semibold shrink-0">
+              {photo.matches ? `${photo.matches} Matches` : `${photo.confidence} Match`}
+            </span>
+          )}
         </div>
       </div>
     </div>

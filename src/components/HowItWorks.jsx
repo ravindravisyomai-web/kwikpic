@@ -405,7 +405,7 @@ export default function HowItWorks({ onOpenAuthModal }) {
                 <div className="space-y-4">
                   {/* Top Step Number & Status Label */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#888888]">
+                    <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666666]">
                       STEP <span className="text-[#C62828]">{step.num}</span>
                     </span>
 

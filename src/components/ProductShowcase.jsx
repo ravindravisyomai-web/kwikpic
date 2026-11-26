@@ -121,7 +121,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                       </button>
                     ))}
                   </div>
-                  <span className="hidden sm:inline text-[11px] text-[#888888] shrink-0">
+                  <span className="hidden sm:inline text-[11px] text-[#666666] shrink-0">
                     Original Quality
                   </span>
                 </div>
@@ -131,7 +131,16 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                   {filteredGalleryPhotos.map((photo, idx) => (
                     <div
                       key={photo.id || idx}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Preview ${photo.title}`}
                       onClick={() => onOpenImageModal && onOpenImageModal(photo)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          onOpenImageModal && onOpenImageModal(photo);
+                        }
+                      }}
                       className="group/img relative aspect-[4/3] rounded-xl overflow-hidden bg-[#F7F7F7] border border-[#E8E8E8] cursor-pointer"
                     >
                       <img
@@ -158,7 +167,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                   <Images className="w-3.5 h-3.5" />
                   <span>2,840 Photos • 4 Categories</span>
                 </span>
-                <span className="text-[11px] font-medium text-[#888888]">01</span>
+                <span className="text-[11px] font-medium text-[#666666]">01</span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-[#202020] tracking-tight">
@@ -235,7 +244,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                   <ScanFace className="w-3.5 h-3.5" />
                   <span>99.4% Match Precision</span>
                 </span>
-                <span className="text-[11px] font-medium text-[#888888]">02</span>
+                <span className="text-[11px] font-medium text-[#666666]">02</span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-[#202020] tracking-tight">
@@ -316,7 +325,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                   <QrCode className="w-3.5 h-3.5" />
                   <span>QR Verified • Zero App Install</span>
                 </span>
-                <span className="text-[11px] font-medium text-[#888888]">03</span>
+                <span className="text-[11px] font-medium text-[#666666]">03</span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-[#202020] tracking-tight">
@@ -405,7 +414,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
                   <UploadCloud className="w-3.5 h-3.5" />
                   <span>42 Active Events • Live Sync</span>
                 </span>
-                <span className="text-[11px] font-medium text-[#888888]">04</span>
+                <span className="text-[11px] font-medium text-[#666666]">04</span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-[#202020] tracking-tight">

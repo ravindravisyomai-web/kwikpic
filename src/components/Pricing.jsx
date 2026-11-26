@@ -27,6 +27,9 @@ export default function Pricing({ onOpenAuthModal }) {
               Monthly
             </span>
             <button
+              type="button"
+              role="switch"
+              aria-checked={billingCycle === 'yearly'}
               onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
               aria-label="Toggle billing cycle"
               className={`w-11 h-6 rounded-full p-1 relative transition-colors focus:outline-none cursor-pointer ${
