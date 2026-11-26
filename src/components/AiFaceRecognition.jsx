@@ -69,10 +69,9 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-14 gsap-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>AI FACE DISCOVERY & QR ACCESS</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            Guest Photo Discovery
+          </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#202020] tracking-tight leading-[1.12] gsap-reveal-heading">
             One Scan.{' '}
@@ -376,10 +375,9 @@ export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal })
               </span>
 
               {/* Status indicator */}
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[10px] font-semibold text-[#C62828]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#43866A] animate-pulse" />
-                <span>Auto-play 4s</span>
-              </div>
+              <span className="text-[11px] font-medium text-[#666666]">
+                4s Walkthrough
+              </span>
             </div>
 
             {guestSteps.map((step) => {

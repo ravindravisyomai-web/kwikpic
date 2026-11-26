@@ -50,10 +50,9 @@ export default function UseCasesPage({ onOpenAuthModal, onOpenImageModal }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold shadow-xs gsap-fade-up">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]"></span>
-                <span>{data.eyebrow}</span>
-              </div>
+              <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828] gsap-fade-up">
+                {data.eyebrow}
+              </span>
 
               <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-bold text-[#202020] tracking-tight leading-[1.12] gsap-fade-up">
                 {data.heroHeadline}
@@ -217,7 +216,7 @@ export default function UseCasesPage({ onOpenAuthModal, onOpenImageModal }) {
               Connected Journey
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#202020]">
-              4 Steps to Seamless Event Sharing
+              4 Steps to Easy Event Sharing
             </h2>
           </div>
 

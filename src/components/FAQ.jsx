@@ -20,9 +20,9 @@ export default function FAQ() {
 
         {/* SECTION HEADER */}
         <div className="text-center space-y-4 mb-16 gsap-fade-up">
-          <div className="inline-flex items-center justify-center px-4 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold tracking-wide shadow-xs">
-            <span>FAQs</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            FAQs
+          </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#202020] tracking-tight leading-[1.2] max-w-2xl mx-auto gsap-reveal-heading">
             Common Questions, Clear Answers

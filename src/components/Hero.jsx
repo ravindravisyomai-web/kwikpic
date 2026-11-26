@@ -28,16 +28,15 @@ export default function Hero({ onOpenAuthModal }) {
       {/* CENTRAL HERO CONTENT */}
       <div className="w-full max-w-[540px] md:max-w-[500px] lg:max-w-[660px] xl:max-w-[800px] 2xl:max-w-[880px] mx-auto px-4 sm:px-6 relative z-10 text-center">
         
-        {/* Subtle Eyebrow Label with Entrance Animation */}
-        <motion.div 
+        {/* Clean Editorial Eyebrow Label */}
+        <motion.p 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-[11px] sm:text-xs font-medium mb-5 sm:mb-6 shadow-[0_1px_2px_rgba(32,32,32,0.02)]"
+          className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#C62828] mb-4 sm:mb-5"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse"></span>
-          <span>Intelligent Event Photo Sharing</span>
-        </motion.div>
+          Event Photo Sharing for Studios &amp; Guests
+        </motion.p>
 
         {/* Central Full-Width Headline with Fluid clamp() Typography */}
         <div className="space-y-1 sm:space-y-2 mb-5 sm:mb-7">
@@ -67,7 +66,7 @@ export default function Hero({ onOpenAuthModal }) {
           transition={{ duration: 0.35, delay: 0.17, ease: [0.16, 1, 0.3, 1] }}
           className="text-[clamp(0.9375rem,1.45vw,1.1875rem)] text-[#666666] max-w-xl lg:max-w-2xl mx-auto font-normal leading-relaxed mb-8 sm:mb-10"
         >
-          Share event photos effortlessly with intelligent photo discovery. Let wedding and event guests find their memories instantly without searching through thousands of photographs.
+          Share wedding and event galleries where guests find their own photos in seconds with a quick selfie—no scrolling through thousands of pictures.
         </motion.p>
 
         {/* CTA Buttons with Stagger & Magnetic Hover Response */}

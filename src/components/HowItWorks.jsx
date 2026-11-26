@@ -359,10 +359,9 @@ export default function HowItWorks({ onOpenAuthModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
-          <div className="how-header-reveal inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-[11px] font-bold tracking-[0.12em] uppercase shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]" />
-            <span>HOW IT WORKS</span>
-          </div>
+          <span className="how-header-reveal inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            How It Works
+          </span>
 
           <h2 className="how-header-reveal text-[clamp(1.75rem,3.6vw,2.85rem)] font-bold text-[#202020] tracking-tight leading-[1.14]">
             Your Event Memories,{' '}
@@ -372,7 +371,7 @@ export default function HowItWorks({ onOpenAuthModal }) {
           </h2>
 
           <p className="how-header-reveal text-[clamp(0.9375rem,1.35vw,1.1rem)] text-[#666666] max-w-2xl mx-auto leading-relaxed">
-            From creating your event to discovering and sharing every special moment, Lumina makes everything effortless.
+            From creating your event gallery to sharing every special moment, the entire workflow stays simple.
           </p>
         </div>
 
@@ -382,9 +381,8 @@ export default function HowItWorks({ onOpenAuthModal }) {
           {steps.map((st) => (
             <div
               key={`track-${st.num}`}
-              className="relative z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#FCEBEC] text-[10px] font-bold tracking-wider text-[#C62828] shadow-xs"
+              className="relative z-10 px-3 py-1 rounded-md bg-white border border-[#E8E8E8] text-[10px] font-bold tracking-wider text-[#C62828] shadow-xs"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]" />
               <span>STEP {st.num}</span>
             </div>
           ))}
@@ -405,16 +403,15 @@ export default function HowItWorks({ onOpenAuthModal }) {
                 className={`how-step-card group bg-white rounded-3xl border border-[#E8E8E8] p-5 sm:p-6 flex flex-col justify-between soft-card-shadow transition-all duration-300 hover:-translate-y-1.5 hover:border-[#C62828]/50 hover:shadow-[0_24px_48px_-16px_rgba(32,32,32,0.1)] ${tabletSpanClass}`}
               >
                 <div className="space-y-4">
-                  {/* Top Step Number & Status Pill */}
+                  {/* Top Step Number & Status Label */}
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#888888]">
                       STEP <span className="text-[#C62828]">{step.num}</span>
                     </span>
 
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[10px] font-semibold text-[#C62828]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
-                      <span>{step.status}</span>
-                    </div>
+                    <span className="text-[11px] font-semibold text-[#C62828]">
+                      {step.status}
+                    </span>
                   </div>
 
                   {/* Unique Interactive Product UI Preview */}

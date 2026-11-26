@@ -60,7 +60,7 @@ export default function Footer({ onOpenAuthModal }) {
                 </p>
               </div>
               <p>
-                AI-powered event photo sharing and instant facial recognition discovery. Empowering professional photographers, studios, and organizers to deliver high-resolution memories seamlessly.
+                Event photo sharing and instant guest photo matching. Built for photographers, studios, and event teams to deliver full-resolution galleries with zero friction.
               </p>
             </div>
 
@@ -197,7 +197,7 @@ export default function Footer({ onOpenAuthModal }) {
           <div className="flex flex-wrap items-center gap-3">
             <span>© {new Date().getFullYear()} Lumina Technologies Inc. All rights reserved.</span>
             <span className="hidden sm:inline">•</span>
-            <span>Intelligent AI Event Photo Sharing Platform.</span>
+            <span>Event Photo Sharing &amp; Delivery Platform.</span>
           </div>
 
           <button

@@ -6,7 +6,6 @@ import {
   Menu, 
   X, 
   ChevronDown, 
-  Sparkles, 
   Heart, 
   Building2, 
   GraduationCap, 
@@ -20,16 +19,52 @@ export default function Navbar({ onOpenAuthModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [solutionsMegaOpen, setSolutionsMegaOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
+      if (location.pathname === '/' && window.scrollY < 250) {
+        setActiveSection('');
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  // Scroll-spy for homepage sections
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
+    const sectionIds = ['features', 'how-it-works', 'pricing', 'faq'];
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-30% 0px -55% 0px',
+        threshold: 0,
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   // Close menus on route change
   useEffect(() => {
@@ -142,11 +177,25 @@ export default function Navbar({ onOpenAuthModal }) {
             {/* DESKTOP NAVIGATION WITH SINGLE UNIFIED SOLUTIONS MEGA MENU */}
             <nav className="hidden xl:flex items-center gap-8 text-xs font-medium text-[#666666]">
               
-              <a href="/#features" className="hover:text-[#C62828] transition-colors py-1">
+              <a
+                href="/#features"
+                className={`transition-colors py-1 relative ${
+                  activeSection === 'features'
+                    ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
+                    : 'hover:text-[#C62828]'
+                }`}
+              >
                 Features
               </a>
 
-              <a href="/#how-it-works" className="hover:text-[#C62828] transition-colors py-1">
+              <a
+                href="/#how-it-works"
+                className={`transition-colors py-1 relative ${
+                  activeSection === 'how-it-works'
+                    ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
+                    : 'hover:text-[#C62828]'
+                }`}
+              >
                 How It Works
               </a>
 
@@ -158,9 +207,12 @@ export default function Navbar({ onOpenAuthModal }) {
               >
                 <Link
                   to="/solutions"
-                  className={`flex items-center gap-1 py-1 transition-colors cursor-pointer focus:outline-none ${
-                    solutionsMegaOpen || location.pathname.startsWith('/solutions') || location.pathname.startsWith('/use-cases')
-                      ? 'text-[#C62828] font-semibold'
+                  className={`flex items-center gap-1 py-1 transition-colors cursor-pointer focus:outline-none relative ${
+                    solutionsMegaOpen ||
+                    location.pathname === '/solutions' ||
+                    (location.pathname.startsWith('/solutions/') && location.pathname !== '/solutions/photographers') ||
+                    location.pathname.startsWith('/use-cases')
+                      ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
                       : 'hover:text-[#C62828]'
                   }`}
                 >
@@ -286,7 +338,7 @@ export default function Navbar({ onOpenAuthModal }) {
                       {/* Mega Menu Bottom Callout */}
                       <div className="pt-3.5 flex items-center justify-between text-xs text-[#666666]">
                         <span className="flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5 text-[#C62828]" /> Tailored neural face matching & instant QR distribution
+                          <Camera className="w-3.5 h-3.5 text-[#C62828]" /> Fast face matching &amp; instant QR photo sharing for every event
                         </span>
                         <Link 
                           to="/solutions" 
@@ -301,15 +353,36 @@ export default function Navbar({ onOpenAuthModal }) {
                 )}
               </div>
 
-              <Link to="/solutions/photographers" className="hover:text-[#C62828] transition-colors py-1">
+              <Link
+                to="/solutions/photographers"
+                className={`transition-colors py-1 relative ${
+                  location.pathname === '/solutions/photographers'
+                    ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
+                    : 'hover:text-[#C62828]'
+                }`}
+              >
                 For Photographers
               </Link>
 
-              <a href="/#pricing" className="hover:text-[#C62828] transition-colors py-1">
+              <a
+                href="/#pricing"
+                className={`transition-colors py-1 relative ${
+                  activeSection === 'pricing'
+                    ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
+                    : 'hover:text-[#C62828]'
+                }`}
+              >
                 Pricing
               </a>
 
-              <a href="/#faq" className="hover:text-[#C62828] transition-colors py-1">
+              <a
+                href="/#faq"
+                className={`transition-colors py-1 relative ${
+                  activeSection === 'faq'
+                    ? 'text-[#C62828] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#C62828] after:rounded-full'
+                    : 'hover:text-[#C62828]'
+                }`}
+              >
                 FAQ
               </a>
             </nav>

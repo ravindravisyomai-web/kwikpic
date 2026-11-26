@@ -158,7 +158,7 @@ export const photographerFeatures = [
     id: 'bulk-upload',
     badge: 'High-Speed Ingestion',
     title: 'Lightning Bulk & Nested Folder Uploads',
-    description: 'Upload 50GB+ camera RAW or high-resolution JPEGs directly from SD cards without waiting. Intelligent parallel chunking automatically resumes if connectivity drops.',
+    description: 'Upload 50GB+ camera RAW or high-resolution JPEGs straight from SD cards. Resumable multi-part uploads pick up automatically if Wi-Fi drops.',
     bullets: [
       'Preserves complete camera EXIF metadata, timestamp order, and custom ratings',
       'One-shot folder upload maintains your sub-event folders (Mehendi, Haldi, Reception)',
@@ -233,7 +233,7 @@ export const useCases = [
   {
     title: 'Milestone Birthdays & Anniversaries',
     tag: 'Family Favorite',
-    description: 'Keep intimate gatherings warm and effortless. Grandparents, cousins, and distant relatives receive high-resolution memories on their phones.',
+    description: 'Keep intimate gatherings warm and simple. Grandparents, cousins, and distant relatives get high-resolution photos straight on their phones.',
     img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80',
     stat: '100% cloud secure'
   }
@@ -301,7 +301,7 @@ export const pricingPlans = [
 export const faqs = [
   {
     q: 'How accurately does the AI Face Recognition identify guests?',
-    a: 'Our vision models achieve over 99.4% accuracy, reliably matching guests across varied lighting, side profiles, sunglasses, and traditional attire.'
+    a: 'Our face matching achieves over 99.4% accuracy across varied lighting, side profiles, sunglasses, and traditional attire.'
   },
   {
     q: 'Do event guests need to install an app or create an account?',

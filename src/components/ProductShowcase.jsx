@@ -5,7 +5,6 @@ import {
   Check,
   FolderOpen,
   Calendar,
-  Sparkles,
   UploadCloud,
   ScanFace,
   Images,
@@ -56,10 +55,9 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]"></span>
-            <span>Platform Capabilities</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            Platform Capabilities
+          </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#202020] tracking-tight leading-[1.15] gsap-reveal-heading">
             Everything{' '}
@@ -69,7 +67,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
           </h2>
 
           <p className="text-base sm:text-lg text-[#666666] max-w-2xl mx-auto font-normal leading-relaxed gsap-reveal-text">
-            From organizing event photos to discovering and sharing memories, everything works together in one seamless platform.
+            From organizing event photos to finding and sharing memories, everything works together in one place.
           </p>
         </div>
 
@@ -156,8 +154,8 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
             {/* Card Copy & Status */}
             <div className="p-5 sm:p-6 pt-5 flex flex-col gap-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#C62828] bg-[#FFF5F5] px-2.5 py-0.5 rounded-full border border-[#FCEBEC]">
-                  <Images className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">
+                  <Images className="w-3.5 h-3.5" />
                   <span>2,840 Photos • 4 Categories</span>
                 </span>
                 <span className="text-[11px] font-medium text-[#888888]">01</span>
@@ -168,7 +166,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
               </h3>
 
               <p className="text-sm text-[#666666] leading-relaxed">
-                Keep all your event photographs organized in one beautiful gallery. Browse, manage and share memories effortlessly.
+                Keep all your event photographs organized in one clean gallery. Browse, sort, and share albums with clients and guests.
               </p>
             </div>
           </article>
@@ -233,9 +231,9 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
             {/* Card Copy & Status */}
             <div className="p-5 sm:p-6 pt-5 flex flex-col gap-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#C62828] bg-[#FFF5F5] px-2.5 py-0.5 rounded-full border border-[#FCEBEC]">
-                  <Sparkles className="w-3 h-3" />
-                  <span>99.4% AI Match Precision</span>
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">
+                  <ScanFace className="w-3.5 h-3.5" />
+                  <span>99.4% Match Precision</span>
                 </span>
                 <span className="text-[11px] font-medium text-[#888888]">02</span>
               </div>
@@ -245,7 +243,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
               </h3>
 
               <p className="text-sm text-[#666666] leading-relaxed">
-                Let guests discover their personal event photographs using intelligent AI-powered face matching.
+                Let guests find their own event photos in seconds using quick, private face matching.
               </p>
             </div>
           </article>
@@ -314,8 +312,8 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
             {/* Card Copy & Status */}
             <div className="p-5 sm:p-6 pt-5 flex flex-col gap-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#C62828] bg-[#FFF5F5] px-2.5 py-0.5 rounded-full border border-[#FCEBEC]">
-                  <QrCode className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">
+                  <QrCode className="w-3.5 h-3.5" />
                   <span>QR Verified • Zero App Install</span>
                 </span>
                 <span className="text-[11px] font-medium text-[#888888]">03</span>
@@ -403,8 +401,8 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
             {/* Card Copy & Status */}
             <div className="p-5 sm:p-6 pt-5 flex flex-col gap-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#C62828] bg-[#FFF5F5] px-2.5 py-0.5 rounded-full border border-[#FCEBEC]">
-                  <UploadCloud className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">
+                  <UploadCloud className="w-3.5 h-3.5" />
                   <span>42 Active Events • Live Sync</span>
                 </span>
                 <span className="text-[11px] font-medium text-[#888888]">04</span>
@@ -424,7 +422,7 @@ export default function ProductShowcase({ onOpenAuthModal, onOpenImageModal }) {
         {/* 3. SUPPORTING FEATURE BENEFIT ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 max-w-5xl mx-auto">
           <div className="space-y-1.5 text-center sm:text-left">
-            <h4 className="text-sm font-bold text-[#202020]">Effortless Distribution</h4>
+            <h4 className="text-sm font-bold text-[#202020]">Instant Guest Delivery</h4>
             <p className="text-xs text-[#666666] leading-relaxed">
               No manual image sorting or WhatsApp sharing. Every guest receives their personal photos automatically.
             </p>

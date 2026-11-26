@@ -4,7 +4,6 @@ import {
   Camera, 
   ArrowRight, 
   ChevronRight,
-  Sparkles,
   Layers
 } from 'lucide-react';
 import { solutionsData, useCasesData } from '../data/solutionsData';
@@ -25,10 +24,9 @@ export default function SolutionsShowcase() {
         
         {/* 1. SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 gsap-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>SOLUTIONS & USE CASES</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            Solutions &amp; Use Cases
+          </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#202020] tracking-tight leading-[1.15] gsap-reveal-heading">
             Tailored for Every Scale. <span className="text-[#C62828] font-serif italic font-normal">Engineered for Every Event.</span>

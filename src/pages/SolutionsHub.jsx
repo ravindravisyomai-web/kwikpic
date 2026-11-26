@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  Sparkles, 
   ChevronRight
 } from 'lucide-react';
 import { solutionsData, useCasesData } from '../data/solutionsData';
@@ -27,17 +26,16 @@ export default function SolutionsHub({ onOpenAuthModal }) {
       {/* 1. HERO SECTION */}
       <section className="py-16 lg:py-20 bg-[#FAFAFA] border-b border-[#E8E8E8] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold shadow-xs gsap-fade-up">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>SOLUTIONS FOR EVERY MOMENT</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828] gsap-fade-up">
+            Solutions for Every Moment
+          </span>
 
           <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#202020] tracking-tight leading-[1.12] gsap-fade-up">
             One Platform. Every Event. <span className="font-serif italic font-normal text-[#C62828]">Every Memory.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-[#666666] max-w-2xl mx-auto font-normal leading-relaxed gsap-fade-up">
-            Whether you are a professional photographer, wedding studio, business, or event organizer, Lumina helps make event photo sharing a more seamless experience.
+            Built for photography studios, wedding teams, businesses, and event organizers to deliver event photos without the back-and-forth.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2 gsap-fade-up">
@@ -171,7 +169,7 @@ export default function SolutionsHub({ onOpenAuthModal }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto space-y-3 mb-14 gsap-fade-up">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#C62828]">
-              Seamless Workflow
+              Simple Workflow
             </span>
             <h2 className="text-3xl font-bold text-[#202020]">
               How Lumina Works for Every Gathering

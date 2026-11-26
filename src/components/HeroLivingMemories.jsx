@@ -108,9 +108,8 @@ export function MemoryFrameCard({ frame, shadowClass = 'shadow-[0_14px_30px_-10p
         {/* Subtle natural edge shading */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
 
-        {/* AI Match Badge Pill */}
-        <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full bg-white/95 border border-[#E8E8E8] flex items-center gap-1 shadow-xs">
-          <span className="w-1 h-1 rounded-full bg-[#C62828] animate-pulse"></span>
+        {/* Match Percentage Pill */}
+        <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-md bg-white/95 border border-[#E8E8E8] shadow-xs">
           <span className="text-[9px] font-bold text-[#202020] tracking-tight">{frame.match}</span>
         </div>
       </div>
@@ -118,7 +117,7 @@ export function MemoryFrameCard({ frame, shadowClass = 'shadow-[0_14px_30px_-10p
       {/* Bottom Frame Metadata Caption */}
       <div className="mt-1.5 px-0.5 flex items-center justify-between gap-1 text-[9px] sm:text-[10px] text-[#666666]">
         <span className="font-medium text-[#202020] truncate">{frame.tag}</span>
-        <span className="text-[#C62828] font-semibold text-[8px] uppercase tracking-wider shrink-0">AI Found</span>
+        <span className="text-[#C62828] font-semibold text-[8px] uppercase tracking-wider shrink-0">Matched</span>
       </div>
     </div>
   );

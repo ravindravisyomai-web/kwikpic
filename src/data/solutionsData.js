@@ -6,7 +6,7 @@ export const solutionsData = {
     title: 'Photographers & Studios',
     eyebrow: 'BUILT FOR PROFESSIONAL PHOTOGRAPHERS',
     heroHeadline: 'Less Time Managing Photos. More Time Capturing Moments.',
-    heroSubline: 'Give your clients a smoother photography experience with organized event galleries, intelligent photo discovery, and seamless photo delivery.',
+    heroSubline: 'Give your clients a better photography experience with organized galleries, instant guest photo lookup, and fast delivery.',
     heroImage: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=85',
     breadcrumbs: [
       { name: 'Home', href: '/' },
@@ -31,17 +31,17 @@ export const solutionsData = {
       {
         badge: 'Bulk & Nested Folder Uploads',
         title: 'Direct-to-Cloud Parallel Ingestion',
-        desc: 'Upload 50GB+ camera RAW or high-resolution JPEGs directly from SD cards without waiting. Intelligent parallel chunking with automatic resume.'
+        desc: 'Upload 50GB+ camera RAW or high-resolution JPEGs straight from SD cards with resumable multi-part uploads.'
       },
       {
         badge: 'AI Face Recognition',
         title: 'Automated Guest Discovery',
-        desc: 'Proprietary edge neural models identify faces across thousands of shots so guests find their personal portraits in seconds.'
+        desc: 'Fast face matching identifies guests across thousands of shots so everyone finds their portraits in seconds.'
       },
       {
         badge: 'Studio Branding & Proofing',
         title: 'Interactive Album Proofing & Watermarks',
-        desc: 'Couples shortlist album selections effortlessly. Export approved filenames directly into Adobe Lightroom or Photoshop.'
+        desc: 'Couples shortlist album favorites in minutes and export approved filenames directly into Adobe Lightroom or Photoshop.'
       }
     ],
     workflow: [
@@ -115,7 +115,7 @@ export const solutionsData = {
       },
       {
         badge: 'Couple Album Selections',
-        title: 'Seamless Digital Proofing Portal',
+        title: 'Digital Album Proofing Portal',
         desc: 'Couples heart their favorite photographs with live target counters (e.g., 60 of 80 chosen) and leave specific retouching notes.'
       }
     ],
@@ -308,7 +308,7 @@ export const useCasesData = {
     title: 'Weddings & Engagements',
     eyebrow: 'USE CASE: WEDDING CELEBRATIONS',
     heroHeadline: 'One Celebration. Thousands of Moments. Find Yours.',
-    heroSubline: 'Bring professional wedding photography and guest memories together through an effortless event photo-sharing experience.',
+    heroSubline: 'Bring professional wedding photography and guest memories together in one shared event gallery.',
     heroImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85',
     breadcrumbs: [
       { name: 'Home', href: '/' },

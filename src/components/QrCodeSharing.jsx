@@ -32,7 +32,7 @@ export default function QrCodeSharing({ onOpenAuthModal }) {
     {
       num: '03',
       title: 'Browse Your Matched Moments',
-      description: 'Neural face matching filters through thousands of event photos to assemble your personal collection.',
+      description: 'Face matching filters through thousands of event photos to pull together your personal collection.',
       screenIndex: 2,
     },
     {
@@ -61,10 +61,9 @@ export default function QrCodeSharing({ onOpenAuthModal }) {
 
         {/* 1. SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16 gsap-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold">
-            <QrCode className="w-3.5 h-3.5" />
-            <span>INSTANT ON-SITE SHARING</span>
-          </div>
+          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#C62828]">
+            Instant On-Site Sharing
+          </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold text-[#202020] tracking-tight leading-[1.12] gsap-reveal-heading">
             One Scan.<br />
