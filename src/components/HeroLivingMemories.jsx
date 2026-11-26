@@ -1,26 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 // Curated authentic event photography for the floating memory frames
-const MEMORY_FRAMES = [
+export const MEMORY_FRAMES = [
   // 1. Left Top (Midground) — Wedding floral garland celebration
   {
     id: 'frame-1',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80',
     tag: 'Udaipur • Garland Vows',
     match: '99.4%',
-    depth: 'mid', // midground
-    positionClass: 'top-[12%] left-[2%] lg:left-[4%] xl:left-[6%]',
+    depth: 'mid',
+    positionClass: 'top-[11%] left-[1.5%] lg:left-[2.5%] xl:left-[3.5%] 2xl:left-[5.5%]',
     rotation: -4,
-    widthClass: 'w-[140px] sm:w-[160px] lg:w-[180px]',
+    widthClass: 'w-[105px] lg:w-[138px] xl:w-[165px] 2xl:w-[180px]',
     floatDuration: 7.2,
     floatDistance: 12,
-    hideOnMobile: true
+    hideOnTablet: false
   },
   // 2. Left Lower-Middle (Foreground) — Candid laughter / guest celebration
   {
@@ -28,13 +23,13 @@ const MEMORY_FRAMES = [
     image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=500&q=80',
     tag: 'Reception • Table 04',
     match: '98.9%',
-    depth: 'near', // foreground
-    positionClass: 'top-[54%] left-[1.5%] lg:left-[3.5%] xl:left-[5%]',
+    depth: 'near',
+    positionClass: 'top-[58%] left-[1.5%] lg:left-[2.5%] xl:left-[3.5%] 2xl:left-[5%]',
     rotation: 3,
-    widthClass: 'w-[150px] sm:w-[175px] lg:w-[195px]',
+    widthClass: 'w-[105px] lg:w-[140px] xl:w-[175px] 2xl:w-[195px]',
     floatDuration: 8.5,
     floatDistance: 14,
-    hideOnMobile: false // visible as subtle edge element
+    hideOnTablet: false
   },
   // 3. Left Far Background (Distant) — Romantic couple sunset silhouette
   {
@@ -42,13 +37,13 @@ const MEMORY_FRAMES = [
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=500&q=80',
     tag: 'Sunset Golden Hour',
     match: '99.1%',
-    depth: 'far', // background
-    positionClass: 'top-[34%] left-[0.5%] lg:left-[1.5%] xl:left-[2.5%]',
+    depth: 'far',
+    positionClass: 'top-[34%] left-[1%] xl:left-[1.5%] 2xl:left-[2.5%]',
     rotation: -7,
-    widthClass: 'w-[115px] sm:w-[130px] lg:w-[145px]',
+    widthClass: 'w-[125px] xl:w-[135px] 2xl:w-[145px]',
     floatDuration: 9.8,
     floatDistance: 9,
-    hideOnMobile: true
+    hideOnTablet: true
   },
   // 4. Right Top (Foreground) — Golden hour couple portrait
   {
@@ -56,13 +51,13 @@ const MEMORY_FRAMES = [
     image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80',
     tag: 'Portrait • 99.8% Match',
     match: '99.8%',
-    depth: 'near', // foreground
-    positionClass: 'top-[14%] right-[2%] lg:right-[4%] xl:right-[6%]',
+    depth: 'near',
+    positionClass: 'top-[12%] right-[1.5%] lg:right-[2.5%] xl:right-[3.5%] 2xl:right-[5.5%]',
     rotation: 4,
-    widthClass: 'w-[155px] sm:w-[180px] lg:w-[200px]',
+    widthClass: 'w-[105px] lg:w-[140px] xl:w-[175px] 2xl:w-[200px]',
     floatDuration: 8.0,
     floatDistance: 15,
-    hideOnMobile: false
+    hideOnTablet: false
   },
   // 5. Right Lower-Middle (Midground) — Corporate conference keynote & summit crowd
   {
@@ -70,13 +65,13 @@ const MEMORY_FRAMES = [
     image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=500&q=80',
     tag: 'Fintech Summit • Keynote',
     match: '99.2%',
-    depth: 'mid', // midground
-    positionClass: 'top-[58%] right-[1.5%] lg:right-[3.5%] xl:right-[5.5%]',
+    depth: 'mid',
+    positionClass: 'top-[60%] right-[1.5%] lg:right-[2.5%] xl:right-[3.5%] 2xl:right-[5.5%]',
     rotation: -3,
-    widthClass: 'w-[145px] sm:w-[165px] lg:w-[185px]',
+    widthClass: 'w-[105px] lg:w-[138px] xl:w-[168px] 2xl:w-[185px]',
     floatDuration: 7.6,
     floatDistance: 11,
-    hideOnMobile: true
+    hideOnTablet: false
   },
   // 6. Right Far Background (Distant) — Music festival celebration & confetti
   {
@@ -84,19 +79,53 @@ const MEMORY_FRAMES = [
     image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=500&q=80',
     tag: 'Music Arena • Live Sync',
     match: '97.8%',
-    depth: 'far', // background
-    positionClass: 'top-[36%] right-[0.5%] lg:right-[1.5%] xl:right-[2.5%]',
+    depth: 'far',
+    positionClass: 'top-[36%] right-[1%] xl:right-[1.5%] 2xl:right-[2.5%]',
     rotation: 6,
-    widthClass: 'w-[120px] sm:w-[135px] lg:w-[150px]',
+    widthClass: 'w-[125px] xl:w-[135px] 2xl:w-[150px]',
     floatDuration: 9.2,
     floatDistance: 8,
-    hideOnMobile: true
+    hideOnTablet: true
   }
 ];
 
+/**
+ * Shared Polaroid-style photographic memory card used by both desktop floating
+ * frames and the mobile horizontal gallery strip.
+ */
+export function MemoryFrameCard({ frame, shadowClass = 'shadow-[0_14px_30px_-10px_rgba(32,32,32,0.12)]' }) {
+  return (
+    <div className={`bg-white p-1.5 sm:p-2 rounded-2xl border border-[#E8E8E8] ${shadowClass} group`}>
+      {/* Event Photo Container */}
+      <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-[#F7F7F7]">
+        <img
+          src={frame.image}
+          alt={frame.tag}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+
+        {/* Subtle natural edge shading */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
+
+        {/* AI Match Badge Pill */}
+        <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full bg-white/95 border border-[#E8E8E8] flex items-center gap-1 shadow-xs">
+          <span className="w-1 h-1 rounded-full bg-[#C62828] animate-pulse"></span>
+          <span className="text-[9px] font-bold text-[#202020] tracking-tight">{frame.match}</span>
+        </div>
+      </div>
+
+      {/* Bottom Frame Metadata Caption */}
+      <div className="mt-1.5 px-0.5 flex items-center justify-between gap-1 text-[9px] sm:text-[10px] text-[#666666]">
+        <span className="font-medium text-[#202020] truncate">{frame.tag}</span>
+        <span className="text-[#C62828] font-semibold text-[8px] uppercase tracking-wider shrink-0">AI Found</span>
+      </div>
+    </div>
+  );
+}
+
 export default function HeroLivingMemories({ mousePos }) {
   const containerRef = useRef(null);
-  const canvasRef = useRef(null);
   const ambientLightRef = useRef(null);
   const framesRef = useRef([]);
 
@@ -109,181 +138,41 @@ export default function HeroLivingMemories({ mousePos }) {
   };
 
   /* -------------------------------------------------------------
-   * 1. CANVAS PARTICLE NETWORK (AI MEMORY PARTICLES & CONNECTING LINES)
-   * ------------------------------------------------------------- */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId;
-    let isVisible = true;
-    const isMobile = window.innerWidth < 768;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Responsive particle count (lean & highly performant)
-    const particleCount = isMobile ? 14 : 32;
-    const maxLineDistance = isMobile ? 85 : 125;
-
-    let width = (canvas.width = canvas.parentElement.offsetWidth || window.innerWidth);
-    let height = (canvas.height = canvas.parentElement.offsetHeight || window.innerHeight);
-
-    const handleResize = () => {
-      if (!canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.offsetWidth;
-      height = canvas.height = canvas.parentElement.offsetHeight;
-    };
-    window.addEventListener('resize', handleResize, { passive: true });
-
-    // Particle pool definition
-    const particles = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-      vy: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-      radius: Math.random() * 1.5 + 1.2,
-      baseAlpha: Math.random() * 0.35 + 0.15,
-      pulse: Math.random() * Math.PI * 2,
-      pulseSpeed: 0.02 + Math.random() * 0.02,
-    }));
-
-    // Mouse coordinates in canvas local space
-    let targetMouseX = width / 2;
-    let targetMouseY = height / 2;
-    let currentMouseX = width / 2;
-    let currentMouseY = height / 2;
-
-    const handleMouseMoveLocal = (e) => {
-      if (prefersReducedMotion || !canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      targetMouseX = e.clientX - rect.left;
-      targetMouseY = e.clientY - rect.top;
-    };
-    window.addEventListener('mousemove', handleMouseMoveLocal, { passive: true });
-
-    // Pause when off-screen to save battery/GPU
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(canvas);
-
-    // Canvas animation loop
-    const render = () => {
-      if (!isVisible) {
-        animationFrameId = requestAnimationFrame(render);
-        return;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      // Smooth mouse damping
-      currentMouseX += (targetMouseX - currentMouseX) * 0.05;
-      currentMouseY += (targetMouseY - currentMouseY) * 0.05;
-
-      // Update and draw particles
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-
-        if (!prefersReducedMotion) {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.pulse += p.pulseSpeed;
-
-          // Wrap edges smoothly
-          if (p.x < -20) p.x = width + 20;
-          if (p.x > width + 20) p.x = -20;
-          if (p.y < -20) p.y = height + 20;
-          if (p.y > height + 20) p.y = -20;
-
-          // Gentle mouse repulsion/attraction
-          const dx = p.x - currentMouseX;
-          const dy = p.y - currentMouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140 && dist > 1) {
-            const force = (140 - dist) / 140 * 0.015;
-            p.x += (dx / dist) * force * 10;
-            p.y += (dy / dist) * force * 10;
-          }
-        }
-
-        const currentAlpha = p.baseAlpha + Math.sin(p.pulse) * 0.1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(100, 139, 114, ${Math.max(0.05, currentAlpha)})`;
-        ctx.fill();
-
-        // Connect nearby particles with subtle sage neural threads
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const distSq = (p.x - p2.x) ** 2 + (p.y - p2.y) ** 2;
-          const maxDistSq = maxLineDistance * maxLineDistance;
-
-          if (distSq < maxDistSq) {
-            const distance = Math.sqrt(distSq);
-            const lineAlpha = (1 - distance / maxLineDistance) * 0.18;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(100, 139, 114, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    animationFrameId = requestAnimationFrame(render);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMoveLocal);
-      observer.disconnect();
-    };
-  }, []);
-
-  /* -------------------------------------------------------------
-   * 2. GSAP TIMELINE: LOAD ENTRANCE, CONTINUOUS FLOAT & SCROLLTRIGGER
+   * GSAP TIMELINE: LOAD ENTRANCE & CONTINUOUS FLOAT FOR PHOTO FRAMES
    * ------------------------------------------------------------- */
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ctx = gsap.context(() => {
-      // PHASE 1: Ambient light entrance (0 - 1s)
+      // Soft ambient studio light entrance
       if (ambientLightRef.current) {
         gsap.fromTo(
           ambientLightRef.current,
-          { opacity: 0, scale: 0.85 },
-          { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, ease: 'power2.out' }
         );
       }
 
-      // PHASE 2: Floating frames entrance (1 - 2s)
+      // Floating photo frames entrance
       if (framesRef.current.length > 0) {
         gsap.fromTo(
           framesRef.current,
           {
             opacity: 0,
-            y: 30,
-            scale: 0.92,
+            y: 16,
+            scale: 0.95,
           },
           {
             opacity: (index) => {
               const depth = MEMORY_FRAMES[index]?.depth;
-              if (depth === 'near') return 0.98;
-              if (depth === 'mid') return 0.90;
-              return 0.75;
+              if (depth === 'near') return 1;
+              if (depth === 'mid') return 0.94;
+              return 0.85;
             },
             y: 0,
             scale: 1,
-            duration: 1.0,
-            delay: 0.4,
-            stagger: 0.1,
+            duration: 0.55,
+            delay: 0.15,
+            stagger: 0.05,
             ease: 'power3.out',
             onComplete: () => {
               // Initiate independent continuous sinusoidal floating on inner containers
@@ -311,18 +200,6 @@ export default function HeroLivingMemories({ mousePos }) {
           }
         );
       }
-
-      // PHASE 3: Canvas particle network fade in
-      if (canvasRef.current) {
-        gsap.fromTo(
-          canvasRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 1.2, delay: 0.8, ease: 'power2.out' }
-        );
-      }
-
-      // Note: Hero background remains permanently alive and visible while scrolling.
-      // It does not disappear when scrolling down.
     }, containerRef);
 
     return () => ctx.revert();
@@ -333,52 +210,45 @@ export default function HeroLivingMemories({ mousePos }) {
       ref={containerRef}
       className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none"
       aria-hidden="true"
+      style={{
+        background: 'linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #f7f7f7 100%)',
+      }}
     >
-      {/* 1. AMBIENT SAGE LIGHTING (Subtle radial light movement) */}
+      {/* 1. SOFT EDITORIAL STUDIO AMBIENT LIGHTING */}
       <div
         ref={ambientLightRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[950px] lg:w-[1100px] h-[550px] bg-gradient-to-tr from-[#648B72]/12 via-[#EBF2ED]/60 to-[#648B72]/15 blur-[140px] rounded-full pointer-events-none -z-10"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          transform: `translate(calc(-50% + ${mousePos?.x ? mousePos.x * 0.3 : 0}px), calc(-50% + ${mousePos?.y ? mousePos.y * 0.3 : 0}px))`,
-          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          background:
+            'radial-gradient(ellipse 68% 58% at 50% 44%, rgba(255, 255, 255, 0.96) 0%, rgba(250, 250, 250, 0.45) 55%, rgba(245, 245, 245, 0.35) 100%)',
+          transform: `translate3d(${mousePos?.x ? mousePos.x * 0.18 : 0}px, ${mousePos?.y ? mousePos.y * 0.18 : 0}px, 0)`,
+          transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
 
-      {/* 2. SUBTLE 35mm FILM-GRAIN TEXTURE OVERLAY */}
-      <div 
-        className="absolute inset-0 opacity-[0.032] mix-blend-multiply pointer-events-none"
+      {/* 2. SUBTLE BOTTOM TONAL BLEND INTO NEXT SECTION */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%)',
         }}
       />
 
-      {/* 3. ARCHITECTURAL SAGE DOT MATRIX */}
-      <div className="absolute inset-0 bg-[radial-gradient(#648B72_0.75px,transparent_0.75px)] [background-size:28px_28px] opacity-[0.14] pointer-events-none" />
-
-      {/* 4. CANVAS AI MEMORY PARTICLES & CONNECTING THREADS */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-1"
-      />
-
-      {/* 5. FLOATING PHOTOGRAPHIC MEMORY FRAMES */}
+      {/* 3. FLOATING PHOTOGRAPHIC MEMORY FRAMES */}
       <div className="absolute inset-0 w-full h-full z-2">
-        {MEMORY_FRAMES.map((frame, idx) => {
-          // Depth factor determines parallax sensitivity and blur
+        {MEMORY_FRAMES.map((frame) => {
           const depthMultiplier = frame.depth === 'near' ? 1.0 : frame.depth === 'mid' ? 0.6 : 0.3;
           const parallaxX = (mousePos?.x || 0) * depthMultiplier;
           const parallaxY = (mousePos?.y || 0) * depthMultiplier;
 
-          // Depth-based shadow & blur styling
-          const blurClass = frame.depth === 'far' ? 'blur-[0.7px]' : '';
           const shadowClass =
             frame.depth === 'near'
-              ? 'shadow-[0_20px_45px_-12px_rgba(32,37,34,0.16)] ring-1 ring-black/[0.04]'
+              ? 'shadow-[0_22px_45px_-14px_rgba(32,32,32,0.16),0_4px_12px_-2px_rgba(32,32,32,0.06)] ring-1 ring-black/[0.04]'
               : frame.depth === 'mid'
-              ? 'shadow-[0_14px_30px_-10px_rgba(32,37,34,0.12)]'
-              : 'shadow-[0_8px_20px_-8px_rgba(32,37,34,0.08)]';
+              ? 'shadow-[0_16px_32px_-12px_rgba(32,32,32,0.12),0_2px_8px_-2px_rgba(32,32,32,0.04)]'
+              : 'shadow-[0_10px_24px_-10px_rgba(32,32,32,0.09)]';
 
-          const visibilityClass = frame.hideOnMobile ? 'hidden md:block' : 'block';
+          const visibilityClass = frame.hideOnTablet ? 'hidden xl:block' : 'hidden md:block';
 
           return (
             <div
@@ -392,41 +262,36 @@ export default function HeroLivingMemories({ mousePos }) {
             >
               {/* Inner floating container animated by GSAP */}
               <div className="hero-frame-float-inner w-full h-full">
-                {/* Premium White Gallery / Polaroid Frame */}
-                <div className={`bg-white/95 backdrop-blur-xs p-1.5 sm:p-2 rounded-2xl border border-[#E8EBE7] ${shadowClass} group`}>
-                  
-                  {/* Event Photo Container */}
-                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-[#F7F8F6]">
-                    <img
-                      src={frame.image}
-                      alt={frame.tag}
-                      loading="lazy"
-                      className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${blurClass}`}
-                    />
-                    
-                    {/* Subtle top glare reflection */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/25 pointer-events-none" />
-
-                    {/* AI Match Badge Pill */}
-                    <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md border border-[#E8EBE7]/80 flex items-center gap-1 shadow-xs">
-                      <span className="w-1 h-1 rounded-full bg-[#648B72] animate-pulse"></span>
-                      <span className="text-[9px] font-bold text-[#202522] tracking-tight">{frame.match}</span>
-                    </div>
-                  </div>
-
-                  {/* Bottom Frame Metadata Caption */}
-                  <div className="mt-1.5 px-0.5 flex items-center justify-between text-[9px] sm:text-[10px] text-[#737873]">
-                    <span className="font-medium text-[#202522] truncate max-w-[110px] sm:max-w-[130px]">{frame.tag}</span>
-                    <span className="text-[#648B72] font-semibold text-[8px] uppercase tracking-wider shrink-0">AI Found</span>
-                  </div>
-
-                </div>
+                <MemoryFrameCard frame={frame} shadowClass={shadowClass} />
               </div>
             </div>
           );
         })}
       </div>
+    </div>
+  );
+}
 
+/**
+ * Clean horizontal scroll gallery strip displayed below hero content on mobile (<768px)
+ * so photographic memory cards never overlap text or CTA buttons.
+ */
+export function HeroMobileMemoryStrip() {
+  return (
+    <div className="md:hidden w-full mt-9">
+      <div className="flex items-stretch gap-3 overflow-x-auto snap-x snap-mandatory pb-2 no-scrollbar">
+        {MEMORY_FRAMES.map((frame) => (
+          <div
+            key={`mobile-${frame.id}`}
+            className="w-[146px] sm:w-[164px] shrink-0 snap-center"
+          >
+            <MemoryFrameCard
+              frame={frame}
+              shadowClass="shadow-[0_12px_24px_-8px_rgba(32,32,32,0.12)]"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

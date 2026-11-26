@@ -301,31 +301,31 @@ export const pricingPlans = [
 export const faqs = [
   {
     q: 'How accurately does the AI Face Recognition identify guests?',
-    a: 'Our neural vision models achieve over 99.4% precision. The system analyzes subtle facial geometry, skin tones, and key features that remain consistent across varying lighting conditions, profile angles, sunglasses, hats, and traditional festive attire (turbans, dupattas, and heavy jewelry).'
+    a: 'Our vision models achieve over 99.4% accuracy, reliably matching guests across varied lighting, side profiles, sunglasses, and traditional attire.'
   },
   {
     q: 'Do event guests need to install an app or create an account?',
-    a: 'No app download or account creation is required! Guests simply scan the event QR code using their iPhone or Android camera, which immediately opens the fast web gallery. They take a 2-second selfie in their mobile browser, and their personal matching photos populate in under 3 seconds.'
+    a: 'No app download or signup is needed. Guests scan the QR code in Chrome or Safari, snap a 2-second selfie, and see their photos in under 3 seconds.'
   },
   {
     q: 'Are photographs uploaded and downloaded in original camera quality?',
-    a: 'Yes. Lumina preserves your original file resolution up to 50MB per photograph. Photographers can configure granular download permissions per gallery—permitting guests to download compressed social-ready images while reserving original 300 DPI master files for the client or album proofing.'
+    a: 'Yes—Lumina preserves original files up to 50MB at 300 DPI. You can allow social-ready downloads for guests while keeping master originals for clients.'
   },
   {
     q: 'Can photographers protect their work with custom watermarks?',
-    a: 'Absolutely. You can upload your studio logo PNG and position it anywhere on the photos (center, corner, or diagonal tile pattern) with adjustable opacity. When a client purchases or is granted download rights, watermark-free originals are automatically delivered.'
+    a: 'Yes. Upload your studio logo PNG, place it in any corner or diagonal pattern with custom opacity, and deliver clean originals once approved.'
   },
   {
     q: 'How does client album selection and proofing work?',
-    a: 'Clients receive an interactive selection link where they can tap heart icons on their favorites, leave timestamped notes for specific retouching requests, and approve final sets. You can export their selected photo file names in one click directly into Adobe Lightroom or Photoshop.'
+    a: 'Clients favorite photos and leave retouching notes in one interactive link. You can export approved filenames directly into Adobe Lightroom or Photoshop in one click.'
   },
   {
     q: 'What happens to guest privacy and uploaded selfies?',
-    a: 'Privacy and data protection are foundational. Selfies uploaded for matching are encrypted in transit and stored strictly for indexing. Guests can remove their photo association anytime with a single click, and studios maintain full administrative control over data retention policies.'
+    a: 'Selfies are encrypted in transit and used strictly to match event photos. Guests can remove their photo matches anytime with one click.'
   },
   {
     q: 'Can I use my own studio branding and custom domain?',
-    a: 'Yes! Pro and Agency tiers allow you to map your own custom domain (e.g. photos.yourstudio.com), add custom color palettes, and place your studio logo on all guest-facing landing screens and email notifications.'
+    a: 'Yes. Pro and Agency plans support custom domains (such as photos.yourstudio.com), custom colors, and your studio logo across guest galleries.'
   }
 ];
 
@@ -334,7 +334,7 @@ export const testimonials = [
     name: 'Kabir & Srishti Varma',
     role: 'Destination Wedding Photographers',
     studio: 'Artisan Storytellers, Udaipur',
-    quote: 'Lumina completely transformed our post-event client experience. At a 700-guest royal wedding in Udaipur, guests received their personalized photo links within minutes of our same-day edit upload. The couples loved it and we gained 8 new wedding inquiries just from guest scans!',
+    quote: 'At a 700-guest wedding in Udaipur, guests received their personal photos within minutes of upload—and we gained 8 new wedding inquiries directly from guest scans.',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     rating: 5,
     eventsCount: '140+ Events Hosted'
@@ -343,7 +343,7 @@ export const testimonials = [
     name: 'Vikram Malhotra',
     role: 'Founder & Lead Cinematographer',
     studio: 'Lumina Moments Studio, Mumbai',
-    quote: 'Before Lumina, album proofing took 3 to 4 months of back-and-forth WhatsApp messages. Now our couples finalize their album selections in less than 10 days using the intuitive heart and comment system. The Lightroom filename export is a lifesaver.',
+    quote: 'Album proofing used to take months of WhatsApp messages. Now couples finalize their selects in under 10 days, and the Lightroom filename export saves hours.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
     rating: 5,
     eventsCount: '320+ Events Hosted'
@@ -352,7 +352,7 @@ export const testimonials = [
     name: 'Natasha Roy',
     role: 'Head of Experiential Events',
     studio: 'Apex Corporate Conclaves, Bangalore',
-    quote: 'For multi-track tech summits with 3,000 attendees, delivering stage and audience photos was a logistical nightmare. With Lumina’s QR standees on conference tables, attendees scanned, snapped a selfie, and had their keynote photos before lunch. The speed is unprecedented.',
+    quote: 'At our 3,000-attendee tech summits, table QR standees let delegates scan, take a selfie, and download their keynote photos before lunch.',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
     rating: 5,
     eventsCount: '85+ Summits Hosted'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Camera, 
@@ -12,16 +12,13 @@ import {
   GraduationCap, 
   PartyPopper, 
   Trophy, 
-  Music,
-  ExternalLink
+  Music
 } from 'lucide-react';
 
 export default function Navbar({ onOpenAuthModal }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [solutionsMegaOpen, setSolutionsMegaOpen] = useState(false);
-  
-  // Mobile accordion states
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
 
   const location = useLocation();
@@ -38,7 +35,6 @@ export default function Navbar({ onOpenAuthModal }) {
   useEffect(() => {
     setMobileMenuOpen(false);
     setSolutionsMegaOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
 
   // Lock body scroll when mobile menu is open
@@ -126,7 +122,7 @@ export default function Navbar({ onOpenAuthModal }) {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || solutionsMegaOpen
-            ? 'bg-white/98 backdrop-blur-md border-b border-[#E8EBE7] py-3.5 shadow-[0_4px_20px_-4px_rgba(32,37,34,0.05)]'
+            ? 'bg-white/98 backdrop-blur-md border-b border-[#E8E8E8] py-3.5 shadow-[0_4px_20px_-4px_rgba(32,32,32,0.05)]'
             : 'bg-white py-4 border-b border-transparent'
         }`}
       >
@@ -135,22 +131,22 @@ export default function Navbar({ onOpenAuthModal }) {
             
             {/* BRAND LOGO */}
             <Link to="/" className="flex items-center gap-2.5 group focus:outline-none">
-              <div className="w-8 h-8 rounded-lg bg-[#202522] flex items-center justify-center text-white transition-transform duration-200 group-hover:scale-105">
-                <Camera className="w-4 h-4 text-[#E8EBE7]" />
+              <div className="w-8 h-8 rounded-lg bg-[#C62828] group-hover:bg-[#A61F24] flex items-center justify-center text-white transition-all duration-200 group-hover:scale-105 shadow-xs">
+                <Camera className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-lg tracking-tight text-[#202522] flex items-center">
-                Lumina<span className="text-[#648B72] text-xl leading-none">.</span>
+              <span className="font-bold text-lg tracking-tight text-[#202020] flex items-center">
+                Lumina<span className="text-[#C62828] text-xl leading-none">.</span>
               </span>
             </Link>
 
             {/* DESKTOP NAVIGATION WITH SINGLE UNIFIED SOLUTIONS MEGA MENU */}
-            <nav className="hidden xl:flex items-center gap-8 text-xs font-medium text-[#737873]">
+            <nav className="hidden xl:flex items-center gap-8 text-xs font-medium text-[#666666]">
               
-              <a href="/#features" className="hover:text-[#202522] transition-colors py-1">
+              <a href="/#features" className="hover:text-[#C62828] transition-colors py-1">
                 Features
               </a>
 
-              <a href="/#how-it-works" className="hover:text-[#202522] transition-colors py-1">
+              <a href="/#how-it-works" className="hover:text-[#C62828] transition-colors py-1">
                 How It Works
               </a>
 
@@ -164,32 +160,32 @@ export default function Navbar({ onOpenAuthModal }) {
                   to="/solutions"
                   className={`flex items-center gap-1 py-1 transition-colors cursor-pointer focus:outline-none ${
                     solutionsMegaOpen || location.pathname.startsWith('/solutions') || location.pathname.startsWith('/use-cases')
-                      ? 'text-[#202522] font-semibold'
-                      : 'hover:text-[#202522]'
+                      ? 'text-[#C62828] font-semibold'
+                      : 'hover:text-[#C62828]'
                   }`}
                 >
                   <span>Solutions</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${solutionsMegaOpen ? 'rotate-180 text-[#648B72]' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${solutionsMegaOpen ? 'rotate-180 text-[#C62828]' : ''}`} />
                 </Link>
 
                 {/* THE UNIFIED 2-COLUMN MEGA MENU CONTAINER */}
                 {solutionsMegaOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[880px] animate-in fade-in slide-in-from-top-1 duration-150">
-                    <div className="bg-white rounded-3xl border border-[#E8EBE7] p-6 shadow-[0_25px_60px_-15px_rgba(32,37,34,0.14)]">
+                    <div className="bg-white rounded-3xl border border-[#E8E8E8] p-6 shadow-[0_25px_60px_-15px_rgba(32,32,32,0.14)]">
                       
                       {/* Mega Menu Top Header */}
-                      <div className="pb-4 mb-5 border-b border-[#E8EBE7] flex items-center justify-between">
+                      <div className="pb-4 mb-5 border-b border-[#E8E8E8] flex items-center justify-between">
                         <div>
-                          <h3 className="text-sm font-bold text-[#202522]">
+                          <h3 className="text-sm font-bold text-[#202020]">
                             Solutions for Every Moment
                           </h3>
-                          <p className="text-xs text-[#737873]">
+                          <p className="text-xs text-[#666666]">
                             Discover smarter ways to manage, share, and experience event photographs.
                           </p>
                         </div>
                         <Link 
                           to="/solutions" 
-                          className="text-xs font-bold text-[#648B72] hover:underline flex items-center gap-1"
+                          className="text-xs font-bold text-[#C62828] hover:text-[#A61F24] hover:underline flex items-center gap-1"
                         >
                           <span>Explore All Solutions</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -197,11 +193,11 @@ export default function Navbar({ onOpenAuthModal }) {
                       </div>
 
                       {/* Two Column Layout: Industry (Left) & Event Type (Right) */}
-                      <div className="grid grid-cols-12 gap-8 pb-5 border-b border-[#E8EBE7]">
+                      <div className="grid grid-cols-12 gap-8 pb-5 border-b border-[#E8E8E8]">
                         
                         {/* LEFT COLUMN: SOLUTIONS BY INDUSTRY */}
                         <div className="col-span-5 space-y-3">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#737873] block mb-2">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block mb-2">
                             SOLUTIONS BY INDUSTRY
                           </span>
 
@@ -215,18 +211,24 @@ export default function Navbar({ onOpenAuthModal }) {
                                   to={item.href}
                                   className={`p-3 rounded-xl border transition-all flex items-start gap-3 group/item ${
                                     isActive 
-                                      ? 'bg-[#FAFBF9] border-[#202522] ring-1 ring-[#202522]' 
-                                      : 'bg-white hover:bg-[#F7F8F6] border-transparent hover:border-[#E8EBE7]'
+                                      ? 'bg-[#FFF5F5] border-[#C62828] ring-1 ring-[#C62828]' 
+                                      : 'bg-white hover:bg-[#FFF5F5]/60 border-transparent hover:border-[#FCEBEC]'
                                   }`}
                                 >
-                                  <div className="w-8 h-8 rounded-lg bg-[#F7F8F6] border border-[#E8EBE7] flex items-center justify-center shrink-0 text-[#202522] group-hover/item:bg-[#202522] group-hover/item:text-white transition-colors">
+                                  <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 transition-colors ${
+                                    isActive
+                                      ? 'bg-[#C62828] border-[#C62828] text-white'
+                                      : 'bg-[#F7F7F7] border-[#E8E8E8] text-[#202020] group-hover/item:bg-[#C62828] group-hover/item:border-[#C62828] group-hover/item:text-white'
+                                  }`}>
                                     <Icon className="w-4 h-4" />
                                   </div>
                                   <div>
-                                    <h4 className="font-bold text-xs text-[#202522] group-hover/item:text-[#648B72] transition-colors">
+                                    <h4 className={`font-bold text-xs transition-colors ${
+                                      isActive ? 'text-[#C62828]' : 'text-[#202020] group-hover/item:text-[#C62828]'
+                                    }`}>
                                       {item.name}
                                     </h4>
-                                    <p className="text-[11px] text-[#737873] leading-snug mt-0.5 line-clamp-2">
+                                    <p className="text-[11px] text-[#666666] leading-snug mt-0.5 line-clamp-2">
                                       {item.desc}
                                     </p>
                                   </div>
@@ -237,8 +239,8 @@ export default function Navbar({ onOpenAuthModal }) {
                         </div>
 
                         {/* RIGHT COLUMN: SOLUTIONS BY EVENT (USE CASES) */}
-                        <div className="col-span-7 space-y-3 pl-3 border-l border-[#E8EBE7]">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#737873] block mb-2">
+                        <div className="col-span-7 space-y-3 pl-3 border-l border-[#E8E8E8]">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888] block mb-2">
                             SOLUTIONS BY EVENT
                           </span>
 
@@ -252,18 +254,24 @@ export default function Navbar({ onOpenAuthModal }) {
                                   to={item.href}
                                   className={`p-2.5 rounded-xl border transition-all flex items-start gap-2.5 group/item ${
                                     isActive 
-                                      ? 'bg-[#FAFBF9] border-[#202522] ring-1 ring-[#202522]' 
-                                      : 'bg-white hover:bg-[#F7F8F6] border-transparent hover:border-[#E8EBE7]'
+                                      ? 'bg-[#FFF5F5] border-[#C62828] ring-1 ring-[#C62828]' 
+                                      : 'bg-white hover:bg-[#FFF5F5]/60 border-transparent hover:border-[#FCEBEC]'
                                   }`}
                                 >
-                                  <div className="w-7 h-7 rounded-lg bg-[#F7F8F6] border border-[#E8EBE7] flex items-center justify-center shrink-0 text-[#202522] group-hover/item:bg-[#202522] group-hover/item:text-white transition-colors">
+                                  <div className={`w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 transition-colors ${
+                                    isActive
+                                      ? 'bg-[#C62828] border-[#C62828] text-white'
+                                      : 'bg-[#F7F7F7] border-[#E8E8E8] text-[#202020] group-hover/item:bg-[#C62828] group-hover/item:border-[#C62828] group-hover/item:text-white'
+                                  }`}>
                                     <Icon className="w-3.5 h-3.5" />
                                   </div>
                                   <div>
-                                    <h4 className="font-bold text-[11px] text-[#202522] group-hover/item:text-[#648B72] transition-colors leading-tight">
+                                    <h4 className={`font-bold text-[11px] transition-colors leading-tight ${
+                                      isActive ? 'text-[#C62828]' : 'text-[#202020] group-hover/item:text-[#C62828]'
+                                    }`}>
                                       {item.name}
                                     </h4>
-                                    <p className="text-[10px] text-[#737873] leading-snug mt-0.5 line-clamp-1">
+                                    <p className="text-[10px] text-[#666666] leading-snug mt-0.5 line-clamp-1">
                                       {item.desc}
                                     </p>
                                   </div>
@@ -276,13 +284,13 @@ export default function Navbar({ onOpenAuthModal }) {
                       </div>
 
                       {/* Mega Menu Bottom Callout */}
-                      <div className="pt-3.5 flex items-center justify-between text-xs text-[#737873]">
+                      <div className="pt-3.5 flex items-center justify-between text-xs text-[#666666]">
                         <span className="flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5 text-[#648B72]" /> Tailored neural face matching & instant QR distribution
+                          <Sparkles className="w-3.5 h-3.5 text-[#C62828]" /> Tailored neural face matching & instant QR distribution
                         </span>
                         <Link 
                           to="/solutions" 
-                          className="font-bold text-[#202522] hover:text-[#648B72] flex items-center gap-1"
+                          className="font-bold text-[#202020] hover:text-[#C62828] flex items-center gap-1 transition-colors"
                         >
                           <span>Explore All Solutions →</span>
                         </Link>
@@ -293,15 +301,15 @@ export default function Navbar({ onOpenAuthModal }) {
                 )}
               </div>
 
-              <Link to="/solutions/photographers" className="hover:text-[#202522] transition-colors py-1">
+              <Link to="/solutions/photographers" className="hover:text-[#C62828] transition-colors py-1">
                 For Photographers
               </Link>
 
-              <a href="/#pricing" className="hover:text-[#202522] transition-colors py-1">
+              <a href="/#pricing" className="hover:text-[#C62828] transition-colors py-1">
                 Pricing
               </a>
 
-              <a href="/#faq" className="hover:text-[#202522] transition-colors py-1">
+              <a href="/#faq" className="hover:text-[#C62828] transition-colors py-1">
                 FAQ
               </a>
             </nav>
@@ -310,23 +318,23 @@ export default function Navbar({ onOpenAuthModal }) {
             <div className="hidden sm:flex items-center gap-4">
               <button
                 onClick={() => onOpenAuthModal('login')}
-                className="text-xs font-semibold text-[#737873] hover:text-[#202522] transition-colors cursor-pointer px-2 py-1.5 focus:outline-none"
+                className="text-xs font-semibold text-[#666666] hover:text-[#C62828] transition-colors cursor-pointer px-2 py-1.5 focus:outline-none"
               >
                 Sign In
               </button>
               <button
                 onClick={() => onOpenAuthModal('signup')}
-                className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-[#202522] hover:bg-[#333A36] transition-all duration-200 shadow-xs cursor-pointer active:scale-98 focus:outline-none"
+                className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-[#C62828] hover:bg-[#A61F24] transition-all duration-200 shadow-xs cursor-pointer active:scale-98 focus:outline-none"
               >
                 <span>Get Started</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#E8EBE7] transform transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 text-white/90 transform transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
 
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-[#202522] hover:bg-[#F7F8F6] rounded-lg focus:outline-none"
+              className="xl:hidden p-2 text-[#202020] hover:bg-[#F7F7F7] hover:text-[#C62828] rounded-lg focus:outline-none transition-colors"
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -341,39 +349,39 @@ export default function Navbar({ onOpenAuthModal }) {
         <div className="fixed inset-0 z-40 xl:hidden bg-white/98 backdrop-blur-md pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200">
           <div className="space-y-4 pt-2">
             
-            <div className="flex flex-col space-y-1 border-b border-[#E8EBE7] pb-3">
+            <div className="flex flex-col space-y-1 border-b border-[#E8E8E8] pb-3">
               <a 
                 href="/#features" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm font-semibold text-[#202522]"
+                className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828] transition-colors"
               >
                 Features
               </a>
               <a 
                 href="/#how-it-works" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm font-semibold text-[#202522]"
+                className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828] transition-colors"
               >
                 How It Works
               </a>
             </div>
 
             {/* UNIFIED SOLUTIONS MOBILE ACCORDION */}
-            <div className="border-b border-[#E8EBE7] pb-3">
+            <div className="border-b border-[#E8E8E8] pb-3">
               <button
                 onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
-                className="w-full py-2 flex items-center justify-between text-sm font-bold text-[#202522]"
+                className="w-full py-2 flex items-center justify-between text-sm font-bold text-[#202020]"
                 aria-expanded={mobileSolutionsOpen}
               >
                 <span>Solutions</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${mobileSolutionsOpen ? 'rotate-180 text-[#648B72]' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileSolutionsOpen ? 'rotate-180 text-[#C62828]' : ''}`} />
               </button>
 
               {mobileSolutionsOpen && (
                 <div className="pl-2 py-2 space-y-4">
                   {/* Category 1: By Industry */}
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#737873]">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888]">
                       BY INDUSTRY
                     </span>
                     {industrySolutions.map((sol) => (
@@ -381,7 +389,7 @@ export default function Navbar({ onOpenAuthModal }) {
                         key={sol.href}
                         to={sol.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 text-xs text-[#202522] font-medium hover:text-[#648B72]"
+                        className="block py-1 text-xs text-[#202020] font-medium hover:text-[#C62828]"
                       >
                         {sol.name}
                       </Link>
@@ -389,8 +397,8 @@ export default function Navbar({ onOpenAuthModal }) {
                   </div>
 
                   {/* Category 2: By Event */}
-                  <div className="space-y-1.5 pt-2 border-t border-[#E8EBE7]/60">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#737873]">
+                  <div className="space-y-1.5 pt-2 border-t border-[#E8E8E8]/60">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#888888]">
                       BY EVENT
                     </span>
                     {eventSolutions.map((uc) => (
@@ -398,7 +406,7 @@ export default function Navbar({ onOpenAuthModal }) {
                         key={uc.href}
                         to={uc.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 text-xs text-[#202522] font-medium hover:text-[#648B72]"
+                        className="block py-1 text-xs text-[#202020] font-medium hover:text-[#C62828]"
                       >
                         {uc.name}
                       </Link>
@@ -408,7 +416,7 @@ export default function Navbar({ onOpenAuthModal }) {
                   <Link
                     to="/solutions"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block pt-2 text-xs font-bold text-[#648B72]"
+                    className="block pt-2 text-xs font-bold text-[#C62828]"
                   >
                     Explore All Solutions →
                   </Link>
@@ -420,21 +428,21 @@ export default function Navbar({ onOpenAuthModal }) {
               <Link 
                 to="/solutions/photographers" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm font-semibold text-[#202522]"
+                className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828]"
               >
                 For Photographers
               </Link>
               <a 
                 href="/#pricing" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm font-semibold text-[#202522]"
+                className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828]"
               >
                 Pricing
               </a>
               <a 
                 href="/#faq" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm font-semibold text-[#202522]"
+                className="py-2 text-sm font-semibold text-[#202020] hover:text-[#C62828]"
               >
                 FAQ
               </a>
@@ -442,13 +450,13 @@ export default function Navbar({ onOpenAuthModal }) {
 
           </div>
 
-          <div className="space-y-2.5 pt-6 border-t border-[#E8EBE7]">
+          <div className="space-y-2.5 pt-6 border-t border-[#E8E8E8]">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenAuthModal('login');
               }}
-              className="w-full py-2.5 text-xs font-semibold text-[#202522] bg-[#F7F8F6] rounded-lg"
+              className="w-full py-2.5 text-xs font-semibold text-[#202020] bg-white border border-[#E8E8E8] hover:border-[#C62828] hover:text-[#C62828] rounded-lg transition-colors"
             >
               Sign In
             </button>
@@ -457,10 +465,10 @@ export default function Navbar({ onOpenAuthModal }) {
                 setMobileMenuOpen(false);
                 onOpenAuthModal('signup');
               }}
-              className="w-full py-2.5 text-xs font-semibold text-white bg-[#202522] rounded-lg flex items-center justify-center gap-2 shadow-xs"
+              className="w-full py-2.5 text-xs font-semibold text-white bg-[#C62828] hover:bg-[#A61F24] rounded-lg flex items-center justify-center gap-2 shadow-xs transition-colors"
             >
               <span>Get Started Free</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#E8EBE7]" />
+              <ArrowRight className="w-3.5 h-3.5 text-white" />
             </button>
           </div>
         </div>

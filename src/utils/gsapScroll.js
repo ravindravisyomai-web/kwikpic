@@ -4,7 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
+
+const DEFAULT_EASE = 'power3.out';
+const DEFAULT_START = 'top 95%';
+const CARD_START = 'top 94%';
 
 /**
  * Reusable GSAP Utility Functions
@@ -14,15 +19,17 @@ export function revealHeading(target, options = {}) {
   if (!target) return;
   return gsap.fromTo(
     target,
-    { opacity: 0, y: 35 },
+    { opacity: 0, y: 16 },
     {
       opacity: 1,
       y: 0,
-      duration: options.duration || 0.85,
-      ease: options.ease || 'power3.out',
+      duration: options.duration || 0.4,
+      delay: options.delay || 0,
+      ease: options.ease || DEFAULT_EASE,
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: target,
-        start: options.start || 'top 85%',
+        start: options.start || DEFAULT_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -34,15 +41,17 @@ export function revealText(target, options = {}) {
   if (!target) return;
   return gsap.fromTo(
     target,
-    { opacity: 0, y: 25 },
+    { opacity: 0, y: 12 },
     {
       opacity: 1,
       y: 0,
-      duration: options.duration || 0.8,
-      ease: options.ease || 'power3.out',
+      duration: options.duration || 0.35,
+      delay: options.delay ?? 0.06,
+      ease: options.ease || DEFAULT_EASE,
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: target,
-        start: options.start || 'top 88%',
+        start: options.start || DEFAULT_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -54,15 +63,16 @@ export function revealImage(target, options = {}) {
   if (!target) return;
   return gsap.fromTo(
     target,
-    { opacity: 0, scale: 1.06 },
+    { opacity: 0, scale: 1.03 },
     {
       opacity: 1,
       scale: 1,
-      duration: options.duration || 1.1,
+      duration: options.duration || 0.5,
       ease: options.ease || 'power2.out',
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: target,
-        start: options.start || 'top 85%',
+        start: options.start || CARD_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -74,15 +84,16 @@ export function revealCard(target, options = {}) {
   if (!target) return;
   return gsap.fromTo(
     target,
-    { opacity: 0, y: 30 },
+    { opacity: 0, y: 18 },
     {
       opacity: 1,
       y: 0,
-      duration: options.duration || 0.8,
-      ease: options.ease || 'power3.out',
+      duration: options.duration || 0.45,
+      ease: options.ease || DEFAULT_EASE,
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: target,
-        start: options.start || 'top 85%',
+        start: options.start || CARD_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -95,18 +106,21 @@ export function revealStagger(groupTarget, itemSelector = '.gsap-stagger-item', 
   const items = groupTarget.querySelectorAll ? groupTarget.querySelectorAll(itemSelector) : [];
   if (!items.length) return;
 
+  const staggerStep = options.stagger ?? (items.length > 5 ? 0.05 : 0.08);
+
   return gsap.fromTo(
     items,
-    { opacity: 0, y: 32 },
+    { opacity: 0, y: 18 },
     {
       opacity: 1,
       y: 0,
-      duration: options.duration || 0.75,
-      stagger: options.stagger || 0.1,
-      ease: options.ease || 'power3.out',
+      duration: options.duration || 0.45,
+      stagger: staggerStep,
+      ease: options.ease || DEFAULT_EASE,
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: groupTarget,
-        start: options.start || 'top 85%',
+        start: options.start || CARD_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -118,15 +132,16 @@ export function revealSection(target, options = {}) {
   if (!target) return;
   return gsap.fromTo(
     target,
-    { opacity: 0, y: 40 },
+    { opacity: 0, y: 18 },
     {
       opacity: 1,
       y: 0,
-      duration: options.duration || 0.9,
-      ease: options.ease || 'power3.out',
+      duration: options.duration || 0.4,
+      ease: options.ease || DEFAULT_EASE,
+      clearProps: 'transform',
       scrollTrigger: {
         trigger: target,
-        start: options.start || 'top 82%',
+        start: options.start || DEFAULT_START,
         once: true,
         ...options.scrollTrigger,
       },
@@ -158,7 +173,6 @@ export function revealParallax(target, options = {}) {
  * - .gsap-stagger-group > .gsap-stagger-item
  * - .gsap-reveal-image
  * - .gsap-reveal-card
- * - .gsap-scale-card
  * - .gsap-draw-line
  * - .gsap-parallax
  */
@@ -172,17 +186,22 @@ export function initGlobalScrollTriggers(scopeRef) {
     // 1. Standalone Fade Up Elements (.gsap-fade-up)
     const fadeUps = gsap.utils.toArray('.gsap-fade-up');
     fadeUps.forEach((elem) => {
+      // Avoid double-animating wrapper divs that already contain heading/text reveals
+      if (elem.querySelector('.gsap-reveal-heading, .gsap-reveal-text')) {
+        return;
+      }
       gsap.fromTo(
         elem,
-        { opacity: 0, y: 32 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
+          duration: 0.4,
+          ease: DEFAULT_EASE,
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: elem,
-            start: 'top 85%',
+            start: DEFAULT_START,
             once: true,
           },
         }
@@ -194,15 +213,16 @@ export function initGlobalScrollTriggers(scopeRef) {
     headings.forEach((heading) => {
       gsap.fromTo(
         heading,
-        { opacity: 0, y: 35 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
+          duration: 0.4,
+          ease: DEFAULT_EASE,
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: heading,
-            start: 'top 86%',
+            start: DEFAULT_START,
             once: true,
           },
         }
@@ -214,15 +234,17 @@ export function initGlobalScrollTriggers(scopeRef) {
     textBlocks.forEach((text) => {
       gsap.fromTo(
         text,
-        { opacity: 0, y: 22 },
+        { opacity: 0, y: 12 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 0.35,
+          delay: 0.06,
+          ease: DEFAULT_EASE,
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: text,
-            start: 'top 88%',
+            start: DEFAULT_START,
             once: true,
           },
         }
@@ -234,18 +256,20 @@ export function initGlobalScrollTriggers(scopeRef) {
     staggerGroups.forEach((group) => {
       const items = group.querySelectorAll('.gsap-stagger-item');
       if (items.length > 0) {
+        const staggerStep = items.length > 5 ? 0.05 : 0.08;
         gsap.fromTo(
           items,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 18 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.75,
-            stagger: 0.1,
-            ease: 'power3.out',
+            duration: 0.45,
+            stagger: staggerStep,
+            ease: DEFAULT_EASE,
+            clearProps: 'transform',
             scrollTrigger: {
               trigger: group,
-              start: 'top 85%',
+              start: CARD_START,
               once: true,
             },
           }
@@ -258,15 +282,16 @@ export function initGlobalScrollTriggers(scopeRef) {
     cards.forEach((card) => {
       gsap.fromTo(
         card,
-        { opacity: 0, y: 28 },
+        { opacity: 0, y: 18 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 0.45,
+          ease: DEFAULT_EASE,
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
+            start: CARD_START,
             once: true,
           },
         }
@@ -278,15 +303,16 @@ export function initGlobalScrollTriggers(scopeRef) {
     images.forEach((img) => {
       gsap.fromTo(
         img,
-        { opacity: 0, scale: 1.05 },
+        { opacity: 0, scale: 1.03 },
         {
           opacity: 1,
           scale: 1,
-          duration: 1.05,
+          duration: 0.5,
           ease: 'power2.out',
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: img,
-            start: 'top 85%',
+            start: CARD_START,
             once: true,
           },
         }
@@ -319,11 +345,11 @@ export function initGlobalScrollTriggers(scopeRef) {
         { scaleX: 0, transformOrigin: 'left center' },
         {
           scaleX: 1,
-          duration: 0.9,
-          ease: 'power3.out',
+          duration: 0.4,
+          ease: DEFAULT_EASE,
           scrollTrigger: {
             trigger: line,
-            start: 'top 85%',
+            start: DEFAULT_START,
             once: true,
           },
         }

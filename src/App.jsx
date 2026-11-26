@@ -6,10 +6,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProductShowcase from './components/ProductShowcase';
 import AiFaceRecognition from './components/AiFaceRecognition';
-import QrCodeSharing from './components/QrCodeSharing';
 import HowItWorks from './components/HowItWorks';
 import Pricing from './components/Pricing';
-import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
@@ -42,34 +40,65 @@ function HomePage({ onOpenAuthModal, onOpenImageModal }) {
         onOpenImageModal={onOpenImageModal}
       />
 
-      {/* 4. How It Works 4-Step Timeline (Macroscopic Workflow) */}
+      {/* 3. How It Works 3-Step Visual Journey */}
       <HowItWorks onOpenAuthModal={onOpenAuthModal} />
 
-      {/* 5. AI Face Recognition Section (Deep Dive: Guest Discovery) */}
+      {/* 4. AI Face Discovery & On-Site QR Sharing */}
       <AiFaceRecognition
         onOpenAuthModal={onOpenAuthModal}
         onOpenImageModal={onOpenImageModal}
       />
 
-      {/* 6. Instant QR Code Photo Sharing with Android Preview (Deep Dive: On-Site Access) */}
-      <QrCodeSharing onOpenAuthModal={onOpenAuthModal} />
-
-      {/* 7. Solutions & Use Cases Showcase (Industry & Event Verticals) */}
+      {/* 5. Solutions & Use Cases Showcase (Industry & Event Verticals) */}
       <SolutionsShowcase />
 
-      {/* 9. Verified Testimonials Carousel */}
-      <Testimonials />
-
-      {/* 10. Minimal Pricing Plans */}
+      {/* 6. Minimal Pricing Plans */}
       <Pricing onOpenAuthModal={onOpenAuthModal} />
 
-      {/* 11. Chat-Pill FAQ Accordion */}
+      {/* 7. Chat-Pill FAQ Accordion */}
       <FAQ />
 
-      {/* 12. Final Conversion CTA */}
+      {/* 8. Final Conversion CTA */}
       <FinalCTA onOpenAuthModal={onOpenAuthModal} />
     </main>
   );
+}
+
+// Scroll Manager: ensures page reloads start at Hero (0, 0) and route changes reset cleanly
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const resetToTop = () => {
+      if (!window.location.hash) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+    };
+
+    resetToTop();
+
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', resetToTop, { once: true });
+      return () => window.removeEventListener('load', resetToTop);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, [pathname, hash]);
+
+  return null;
 }
 
 // Page Transition Animator Wrapper
@@ -170,7 +199,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#FFFFFF] text-[#202522] selection:bg-[#648B72]/20 selection:text-[#202522] relative flex flex-col justify-between">
+      <ScrollManager />
+      <div className="min-h-screen bg-[#FFFFFF] text-[#202020] selection:bg-[#C62828]/15 selection:text-[#202020] relative flex flex-col justify-between">
         {/* Navigation Bar with Single Solutions Mega-Menu Item */}
         <Navbar onOpenAuthModal={handleOpenAuth} />
 

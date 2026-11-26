@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import HeroLivingMemories from './HeroLivingMemories';
+import HeroLivingMemories, { HeroMobileMemoryStrip } from './HeroLivingMemories';
 
 export default function Hero({ onOpenAuthModal }) {
   const shouldReduceMotion = useReducedMotion();
@@ -20,78 +20,78 @@ export default function Hero({ onOpenAuthModal }) {
     <section
       id="hero"
       onMouseMove={handleMouseMove}
-      className="relative min-h-[86vh] lg:min-h-[91vh] flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 bg-[#FFFFFF] overflow-hidden"
+      className="relative min-h-fit md:min-h-[86vh] lg:min-h-[91vh] flex items-center justify-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-36 lg:pb-24 bg-[#FFFFFF] overflow-hidden"
     >
-      {/* CINEMATIC "LIVING MEMORIES" ANIMATED BACKGROUND */}
+      {/* EDITORIAL PHOTOGRAPHY BACKGROUND & FLOATING MEMORY FRAMES */}
       <HeroLivingMemories mousePos={mousePos} />
 
-      {/* CENTRAL HERO CONTENT (100% PRESERVED TYPOGRAPHY & LAYOUT) */}
-      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 text-center">
+      {/* CENTRAL HERO CONTENT */}
+      <div className="w-full max-w-[540px] md:max-w-[500px] lg:max-w-[660px] xl:max-w-[800px] 2xl:max-w-[880px] mx-auto px-4 sm:px-6 relative z-10 text-center">
         
         {/* Subtle Eyebrow Label with Entrance Animation */}
         <motion.div 
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F8F6]/90 backdrop-blur-xs border border-[#E8EBE7] text-[#648B72] text-xs font-medium mb-6 shadow-[0_1px_2px_rgba(32,37,34,0.02)]"
+          transition={{ duration: 0.3, delay: 0, ease: [0.16, 1, 0.3, 1] }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-[11px] sm:text-xs font-medium mb-5 sm:mb-6 shadow-[0_1px_2px_rgba(32,32,32,0.02)]"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#648B72] animate-pulse"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse"></span>
           <span>Intelligent Event Photo Sharing</span>
         </motion.div>
 
-        {/* Central Full-Width Headline with Word-by-Word Reveal */}
-        <div className="space-y-1 sm:space-y-2 mb-7">
+        {/* Central Full-Width Headline with Fluid clamp() Typography */}
+        <div className="space-y-1 sm:space-y-2 mb-5 sm:mb-7">
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[34px] sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-[#202522] tracking-tight leading-[1.08]"
+            transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[clamp(1.85rem,4.9vw,4.5rem)] font-bold text-[#202020] tracking-tight leading-[1.08]"
           >
             Every Event. Every Photo.
           </motion.h1>
 
           <motion.h2
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[32px] sm:text-5xl md:text-6xl lg:text-[72px] font-serif italic font-normal text-[#648B72] tracking-tight leading-[1.12]"
+            transition={{ duration: 0.4, delay: 0.11, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[clamp(1.75rem,4.7vw,4.5rem)] font-serif italic font-normal text-[#C62828] tracking-tight leading-[1.12]"
           >
             Everyone Finds Their Moments.
           </motion.h2>
         </div>
 
-        {/* Supporting Description with Gentle Fade-Up */}
+        {/* Supporting Description with Fluid clamp() Typography */}
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base sm:text-lg md:text-[19px] text-[#737873] max-w-2xl mx-auto font-normal leading-relaxed mb-10"
+          transition={{ duration: 0.35, delay: 0.17, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[clamp(0.9375rem,1.45vw,1.1875rem)] text-[#666666] max-w-xl lg:max-w-2xl mx-auto font-normal leading-relaxed mb-8 sm:mb-10"
         >
           Share event photos effortlessly with intelligent photo discovery. Let wedding and event guests find their memories instantly without searching through thousands of photographs.
         </motion.p>
 
         {/* CTA Buttons with Stagger & Magnetic Hover Response */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12"
+          transition={{ duration: 0.35, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-3.5 mb-8 sm:mb-12"
         >
           <motion.button
             whileHover={shouldReduceMotion ? {} : { scale: 1.025, y: -1 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.975 }}
             onClick={() => onOpenAuthModal('signup')}
-            className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold text-white bg-[#202522] hover:bg-[#333A36] transition-all duration-200 shadow-xs cursor-pointer focus:outline-none"
+            className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold text-white bg-[#C62828] hover:bg-[#A61F24] transition-all duration-200 shadow-xs cursor-pointer focus:outline-none"
           >
             <span>Get Started Free</span>
-            <ArrowRight className="w-4 h-4 text-[#E8EBE7] transform transition-transform duration-200 group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 text-white/90 transform transition-transform duration-200 group-hover:translate-x-1" />
           </motion.button>
 
           <motion.a
             whileHover={shouldReduceMotion ? {} : { scale: 1.025, y: -1 }}
             whileTap={shouldReduceMotion ? {} : { scale: 0.975 }}
             href="#features"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-[#202522] bg-[#F7F8F6] hover:bg-[#ECEEEA] border border-[#E8EBE7] transition-all duration-200 cursor-pointer focus:outline-none"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-[#202020] bg-white hover:bg-[#FFF5F5] hover:text-[#C62828] border border-[#E8E8E8] hover:border-[#C62828] transition-all duration-200 cursor-pointer focus:outline-none"
           >
             <span>Explore Features</span>
           </motion.a>
@@ -99,20 +99,23 @@ export default function Hero({ onOpenAuthModal }) {
 
         {/* Minimal Horizontal Trust Indicators with Fade-In */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="pt-6 border-t border-[#E8EBE7]/80 max-w-lg mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs text-[#737873]"
+          transition={{ duration: 0.3, delay: 0.27, ease: [0.16, 1, 0.3, 1] }}
+          className="pt-5 sm:pt-6 border-t border-[#E8E8E8] max-w-lg mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 sm:gap-8 text-xs text-[#666666]"
         >
           <div className="flex items-center gap-2">
-            <Check className="w-3.5 h-3.5 text-[#648B72] shrink-0" />
+            <Check className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
             <span>Zero guest app installation</span>
           </div>
           <div className="flex items-center gap-2">
-            <Check className="w-3.5 h-3.5 text-[#648B72] shrink-0" />
+            <Check className="w-3.5 h-3.5 text-[#C62828] shrink-0" />
             <span>Full original quality RAW/JPEG</span>
           </div>
         </motion.div>
+
+        {/* Mobile Horizontal Memory Gallery Strip (Displayed below content on <768px) */}
+        <HeroMobileMemoryStrip />
 
       </div>
     </section>

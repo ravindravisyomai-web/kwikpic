@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
+const DEFAULT_VIEWPORT = { once: true, amount: 0.05, margin: '0px 0px -40px 0px' };
+
 /**
  * AnimatedSection: Viewport-triggered fade & vertical slide reveal
  */
@@ -9,18 +11,18 @@ export function AnimatedSection({
   className = '', 
   delay = 0, 
   direction = 'up',
-  threshold = 0.15 
+  threshold = 0.05 
 }) {
   const shouldReduceMotion = useReducedMotion();
 
   const getInitialPosition = () => {
     if (shouldReduceMotion) return { opacity: 0, y: 0, x: 0 };
     switch (direction) {
-      case 'up': return { opacity: 0, y: 35, x: 0 };
-      case 'down': return { opacity: 0, y: -35, x: 0 };
-      case 'left': return { opacity: 0, x: 35, y: 0 };
-      case 'right': return { opacity: 0, x: -35, y: 0 };
-      default: return { opacity: 0, y: 30, x: 0 };
+      case 'up': return { opacity: 0, y: 16, x: 0 };
+      case 'down': return { opacity: 0, y: -16, x: 0 };
+      case 'left': return { opacity: 0, x: 16, y: 0 };
+      case 'right': return { opacity: 0, x: -16, y: 0 };
+      default: return { opacity: 0, y: 16, x: 0 };
     }
   };
 
@@ -28,9 +30,9 @@ export function AnimatedSection({
     <motion.div
       initial={getInitialPosition()}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, amount: threshold }}
+      viewport={{ once: true, amount: threshold, margin: '0px 0px -40px 0px' }}
       transition={{ 
-        duration: shouldReduceMotion ? 0.3 : 0.7, 
+        duration: shouldReduceMotion ? 0.15 : 0.4, 
         delay, 
         ease: [0.16, 1, 0.3, 1] 
       }}
@@ -47,14 +49,14 @@ export function AnimatedSection({
 export function StaggerContainer({ 
   children, 
   className = '', 
-  staggerDelay = 0.1, 
-  threshold = 0.15 
+  staggerDelay = 0.08, 
+  threshold = 0.05 
 }) {
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: threshold }}
+      viewport={{ once: true, amount: threshold, margin: '0px 0px -40px 0px' }}
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -80,12 +82,12 @@ export function StaggerItem({ children, className = '' }) {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
         visible: { 
           opacity: 1, 
           y: 0,
           transition: {
-            duration: 0.6,
+            duration: shouldReduceMotion ? 0.15 : 0.45,
             ease: [0.16, 1, 0.3, 1]
           }
         }
@@ -104,7 +106,7 @@ export function AnimatedText({
   text, 
   className = '', 
   highlightWords = [],
-  highlightClassName = 'font-serif italic font-normal text-[#648B72]' 
+  highlightClassName = 'font-serif italic font-normal text-[#C62828]' 
 }) {
   const shouldReduceMotion = useReducedMotion();
   const words = text.split(' ');
@@ -126,10 +128,10 @@ export function AnimatedText({
               className={`inline-block ${isHighlighted ? highlightClassName : ''}`}
               initial={{ y: '100%', opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={DEFAULT_VIEWPORT}
               transition={{
-                duration: 0.7,
-                delay: index * 0.045,
+                duration: 0.4,
+                delay: index * 0.025,
                 ease: [0.16, 1, 0.3, 1]
               }}
             >
@@ -143,7 +145,7 @@ export function AnimatedText({
 }
 
 /**
- * RevealImage: Smooth scale & clip-path entrance for images
+ * RevealImage: Smooth scale & opacity entrance for images
  */
 export function RevealImage({ src, alt, className = '', imgClassName = '' }) {
   const shouldReduceMotion = useReducedMotion();
@@ -154,11 +156,11 @@ export function RevealImage({ src, alt, className = '', imgClassName = '' }) {
         src={src}
         alt={alt}
         loading="lazy"
-        initial={{ scale: shouldReduceMotion ? 1 : 1.08, opacity: 0 }}
+        initial={{ scale: shouldReduceMotion ? 1 : 1.03, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={DEFAULT_VIEWPORT}
         transition={{ 
-          duration: 0.9, 
+          duration: shouldReduceMotion ? 0.15 : 0.5, 
           ease: [0.16, 1, 0.3, 1] 
         }}
         className={`w-full h-full object-cover transition-transform duration-500 hover:scale-103 ${imgClassName}`}

@@ -1,385 +1,453 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AndroidDeviceFrame from './AndroidDeviceFrame';
 import {
-  Sparkles,
-  UploadCloud,
-  Camera,
-  Check,
+  QrCode,
   ArrowRight,
-  ShieldCheck,
   Download,
-  Heart,
-  Scan,
-  Search,
-  Layers,
+  Check,
+  Camera,
+  Sparkles,
+  ShieldCheck,
   CheckCircle2,
-  ChevronRight,
   ZoomIn
 } from 'lucide-react';
 import { samplePhotos } from '../data/content';
 
 export default function AiFaceRecognition({ onOpenAuthModal, onOpenImageModal }) {
-  // Interactive Active Stage: 0 (Upload Selfie) | 1 (Finding Matches) | 2 (Matching Results) | 3 (Personal Gallery)
-  const [activeStage, setActiveStage] = useState(0);
+  // Active Screen / Step: 0 (Venue QR) | 1 (Selfie Capture) | 2 (AI Matching) | 3 (Full Quality Save)
+  const [activeStep, setActiveStep] = useState(0);
+  const [standeeHovered, setStandeeHovered] = useState(false);
 
-  const stages = [
+  const guestSteps = [
     {
-      step: '01',
-      phase: 'EVENT UPLOAD',
-      title: 'Every Moment, Organized.',
-      description: 'Photographers upload event photographs in bulk, creating an organized collection ready for discovery.',
-      icon: UploadCloud,
+      num: '01',
+      title: 'Scan Venue QR Code',
+      description: 'Guests point their phone camera at a table standee or banner to open the gallery—no app install needed.',
+      screenIndex: 0
     },
     {
-      step: '02',
-      phase: 'GUEST SELFIE',
-      title: 'One Selfie Is All It Takes.',
-      description: 'Guests upload a selfie through their browser without installing another application.',
-      icon: Camera,
+      num: '02',
+      title: 'Take a 2-Second Selfie',
+      description: 'Capture a quick selfie right inside Chrome or Safari with zero account registration.',
+      screenIndex: 1
     },
     {
-      step: '03',
-      phase: 'INTELLIGENT MATCHING',
-      title: 'Your Moments, Recognized.',
-      description: 'AI face recognition helps identify matching photographs from the event collection.',
-      icon: Sparkles,
+      num: '03',
+      title: 'AI Matches Your Photos',
+      description: 'Our vision engine filters thousands of event shots in under 3 seconds to assemble your personal gallery.',
+      screenIndex: 2
     },
     {
-      step: '04',
-      phase: 'PERSONAL GALLERY',
-      title: 'All Your Memories in One Place.',
-      description: 'Explore your matched photographs in a personalized gallery and access available downloads.',
-      icon: Layers,
-    },
+      num: '04',
+      title: 'Save in Full Quality',
+      description: 'Browse matched moments and download full-resolution favorites straight to your phone.',
+      screenIndex: 3
+    }
   ];
 
-  return (
-    <section id="ai-matching" className="py-24 bg-[#F7F8F6] border-y border-[#E8EBE7] relative overflow-hidden">
+  // Automatic 4-Second Progression Timer (0 -> 1 -> 2 -> 3 -> 0 infinite loop)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 4);
+    }, 4000);
 
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-white/80 blur-[130px] rounded-full pointer-events-none -z-10" />
+    return () => clearInterval(timer);
+  }, [activeStep]);
+
+  const handleSelectStep = (index) => {
+    setActiveStep(index);
+  };
+
+  return (
+    <section
+      id="ai-matching"
+      className="py-20 sm:py-24 bg-[#FFFFFF] relative overflow-hidden"
+    >
+      {/* Subtle ambient background glow */}
+      <div className="absolute top-1/2 right-1/4 w-[560px] h-[380px] bg-[#FFF5F5] blur-[130px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* 1. SECTION HEADER */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16 gsap-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E8EBE7] text-[#648B72] text-xs font-semibold shadow-[0_1px_2px_rgba(32,37,34,0.02)]">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-14 gsap-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[#C62828] text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>AI FACE RECOGNITION TECHNOLOGY</span>
+            <span>AI FACE DISCOVERY & QR ACCESS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold text-[#202522] tracking-tight leading-[1.12] gsap-reveal-heading">
-            Find Your Photos <span className="font-serif italic font-normal text-[#648B72]">Without Searching.</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#202020] tracking-tight leading-[1.12] gsap-reveal-heading">
+            One Scan.{' '}
+            <span className="font-serif italic font-normal text-[#C62828]">
+              Every Moment Found.
+            </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#737873] max-w-2xl mx-auto font-normal leading-relaxed gsap-reveal-text">
-            Thousands of event moments. One simple selfie. Discover the photographs that capture your memories, instantly and effortlessly.
+          <p className="text-base sm:text-lg text-[#666666] max-w-2xl mx-auto font-normal leading-relaxed gsap-reveal-text">
+            Guests scan a venue QR standee, take a quick selfie in their browser, and unlock their personal photos in full resolution.
           </p>
         </div>
 
-        {/* 2. EDITORIAL COMPOSITION: CONNECTED 4-STEP TIMELINE ON LEFT + INTERACTIVE SHOWCASE ON RIGHT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        {/* 2. UNIFIED 3-COLUMN SHOWCASE: QR STANDEE (LEFT) | ANDROID PHONE (CENTER) | 4-STEP CARDS (RIGHT) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative">
+          
+          {/* LEFT: INTERACTIVE ACRYLIC QR STANDEE */}
+          <div className="lg:col-span-3 flex flex-col items-center text-center gsap-fade-up">
+            <div
+              onMouseEnter={() => setStandeeHovered(true)}
+              onMouseLeave={() => setStandeeHovered(false)}
+              onClick={() => handleSelectStep(0)}
+              className={`w-64 max-w-full bg-white rounded-3xl p-6 border transition-all duration-300 cursor-pointer relative overflow-hidden ${
+                activeStep === 0 || standeeHovered
+                  ? 'border-[#C62828] shadow-[0_20px_45px_-12px_rgba(198,40,40,0.14)] -translate-y-1 ring-1 ring-[#C62828]'
+                  : 'border-[#E8E8E8] soft-elevated-shadow'
+              }`}
+            >
+              <div className="text-[10px] font-black uppercase tracking-widest text-[#202020] pb-2 border-b border-[#E8E8E8]/80">
+                AARAV & MEERA
+              </div>
 
-          {/* LEFT: CONNECTED INTERACTIVE TIMELINE */}
-          <div className="lg:col-span-5 space-y-3 relative gsap-stagger-group">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#737873] mb-4 flex items-center justify-between">
-              <span>Interactive Workflow Journey</span>
-              <span className="text-[#648B72] font-semibold">Click to Preview</span>
+              {/* QR Code Container with Laser Scanning Beam during Step 01 */}
+              <div className="my-4 p-4 bg-[#F7F7F7] rounded-2xl border border-[#E8E8E8] relative overflow-hidden">
+                <QrCode
+                  className={`w-32 h-32 mx-auto text-[#202020] transition-transform duration-300 ${
+                    standeeHovered || activeStep === 0 ? 'scale-105 text-[#C62828]' : ''
+                  }`}
+                />
+
+                {/* Laser Beam Sweep during Step 01 */}
+                {activeStep === 0 && (
+                  <div className="absolute inset-x-3 h-[2px] bg-gradient-to-r from-transparent via-[#C62828] to-transparent shadow-[0_0_10px_rgba(198,40,40,0.9)] animate-qr-laser pointer-events-none" />
+                )}
+
+                {/* Live Status Badge */}
+                {activeStep === 0 && (
+                  <div className="absolute inset-x-2 bottom-2 bg-white/95 backdrop-blur-xs text-[10px] font-bold text-[#C62828] py-1 rounded-lg border border-[#FCEBEC] shadow-xs flex items-center justify-center gap-1.5 animate-in fade-in duration-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-ping" />
+                    <span>Live QR Scanning</span>
+                  </div>
+                )}
+
+                {activeStep !== 0 && standeeHovered && (
+                  <span className="absolute inset-x-3 bottom-2 bg-white/95 text-[10px] font-bold text-[#C62828] py-1 rounded-lg border border-[#FCEBEC] shadow-xs">
+                    Preview Step 01
+                  </span>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <p className="text-xs font-bold text-[#202020]">Scan for Event Photos</p>
+                <p className="text-[10px] text-[#666666]">Works in Chrome & Safari • Zero app</p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-[#E8E8E8] flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#C62828]">
+                <span className={`w-1.5 h-1.5 rounded-full bg-[#C62828] ${activeStep === 0 ? 'animate-pulse' : ''}`} />
+                <span>Table QR Standee</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CENTER: REALISTIC ANDROID SMARTPHONE WITH 4 SYNCHRONIZED LIVE SCREENS */}
+          <div className="lg:col-span-5 flex justify-center relative">
+            <div className="hidden lg:block absolute -left-6 top-1/2 -translate-y-1/2 w-8 h-[2px] bg-gradient-to-r from-[#E8E8E8] to-[#C62828]/60" />
+
+            <AndroidDeviceFrame className="w-[285px] sm:w-[300px]" time="9:41">
+              <div className="p-4 bg-white min-h-[450px] flex flex-col justify-between text-left select-none">
+                
+                {/* SCREEN 1: STEP 01 - EVENT GALLERY ACCESS */}
+                {activeStep === 0 && (
+                  <div className="space-y-3 animate-in fade-in duration-300">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#E8E8E8]">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-5 h-5 rounded-md bg-[#C62828] flex items-center justify-center text-white text-[10px] font-bold">
+                          L
+                        </div>
+                        <span className="text-xs font-bold text-[#202020]">Lumina Gallery</span>
+                      </div>
+                      <span className="text-[9px] font-semibold text-[#43866A] bg-[#43866A]/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5" /> QR Verified
+                      </span>
+                    </div>
+
+                    <div className="rounded-xl overflow-hidden aspect-[16/9] relative border border-[#E8E8E8]">
+                      <img
+                        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
+                        alt="Aarav and Meera Wedding Cover"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2.5">
+                        <div>
+                          <p className="text-[10px] text-white font-bold">Aarav & Meera Wedding</p>
+                          <p className="text-[8px] text-white/80">2,840 photos • Udaipur</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-[#F7F7F7] rounded-xl border border-[#E8E8E8] space-y-2 text-center">
+                      <p className="text-[11px] font-bold text-[#202020]">Find Yourself in 2 Seconds</p>
+                      <button
+                        onClick={() => handleSelectStep(1)}
+                        className="w-full py-2 bg-[#C62828] text-white text-[10px] font-semibold rounded-lg shadow-xs hover:bg-[#A61F24] flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                      >
+                        <Camera className="w-3 h-3 text-white" />
+                        <span>Take Quick Selfie</span>
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {samplePhotos.gallery.slice(0, 3).map((p, idx) => (
+                        <img
+                          key={idx}
+                          src={p.url}
+                          alt={p.title}
+                          className="rounded-lg aspect-square object-cover border border-[#E8E8E8]"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* SCREEN 2: STEP 02 - SELFIE CAPTURE & FACIAL RECOGNITION */}
+                {activeStep === 1 && (
+                  <div className="space-y-3.5 animate-in fade-in duration-300">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#E8E8E8]">
+                      <span className="text-xs font-bold text-[#202020]">Selfie Registration</span>
+                      <span className="text-[9px] text-[#43866A] font-semibold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#43866A] animate-pulse" /> Front Camera
+                      </span>
+                    </div>
+
+                    {/* Selfie Preview with Camera Viewfinder Framing & Scan Line */}
+                    <div className="relative rounded-2xl overflow-hidden aspect-square border-2 border-[#C62828] shadow-xs">
+                      <img
+                        src={samplePhotos.aiMatchingDemo.guestSelfie}
+                        alt="Guest Portrait"
+                        className="w-full h-full object-cover"
+                      />
+
+                      {/* Viewfinder Corners */}
+                      <div className="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[#C62828] rounded-tl pointer-events-none" />
+                      <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-[#C62828] rounded-tr pointer-events-none" />
+                      <div className="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b-2 border-l-2 border-[#C62828] rounded-bl pointer-events-none" />
+                      <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#C62828] rounded-br pointer-events-none" />
+
+                      {/* Moving Face Recognition Scan Line */}
+                      <div className="absolute inset-x-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#C62828] to-transparent shadow-[0_0_8px_#C62828] animate-lumina-scan pointer-events-none" />
+
+                      {/* Verified Badge */}
+                      <div className="absolute top-2 right-2 bg-[#43866A] text-white p-1 rounded-full shadow-xs">
+                        <Check className="w-3 h-3" />
+                      </div>
+
+                      <div className="absolute inset-x-3 bottom-2 bg-black/60 backdrop-blur-xs text-[9px] text-white font-medium py-1 px-2 rounded-lg text-center">
+                        Face Frame Aligned • 100% Quality
+                      </div>
+                    </div>
+
+                    <div className="text-center space-y-0.5">
+                      <p className="text-xs font-bold text-[#202020]">{samplePhotos.aiMatchingDemo.guestName}</p>
+                      <p className="text-[10px] text-[#666666]">Selfie captured via mobile browser • Zero app</p>
+                    </div>
+
+                    <button
+                      onClick={() => handleSelectStep(2)}
+                      className="w-full py-2 bg-[#C62828] text-white text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow-xs cursor-pointer hover:bg-[#A61F24] transition-colors"
+                    >
+                      <Sparkles className="w-3 h-3 text-white" />
+                      <span>Scan for Matches →</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* SCREEN 3: STEP 03 - AI PHOTO MATCHING */}
+                {activeStep === 2 && (
+                  <div className="space-y-3 animate-in fade-in duration-300">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#E8E8E8]">
+                      <div>
+                        <span className="text-xs font-bold text-[#202020]">Your Photos Found</span>
+                        <p className="text-[9px] text-[#C62828] font-semibold flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
+                          38 Matches Identified
+                        </p>
+                      </div>
+                      <span className="text-[8px] bg-[#FAFAFA] border border-[#E8E8E8] px-2 py-0.5 rounded text-[#666666] font-medium">
+                        99.4% Precision
+                      </span>
+                    </div>
+
+                    {/* Matched Photos Grid */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {samplePhotos.aiMatchingDemo.matchedPhotos.slice(0, 4).map((p, idx) => (
+                        <div
+                          key={idx}
+                          onClick={() => onOpenImageModal && onOpenImageModal(p)}
+                          className="group relative rounded-xl overflow-hidden aspect-square border border-[#E8E8E8] cursor-pointer"
+                        >
+                          <img src={p.url} alt={p.tag} className="w-full h-full object-cover" />
+                          <span className="absolute bottom-1 right-1 bg-white/95 text-[8px] font-bold text-[#202020] px-1.5 py-0.5 rounded shadow-xs">
+                            {p.confidence}
+                          </span>
+                          <span className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-full bg-white/90 text-[#C62828]">
+                            <ZoomIn className="w-2.5 h-2.5" />
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => handleSelectStep(3)}
+                      className="w-full py-2 bg-[#C62828] text-white text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow-xs cursor-pointer hover:bg-[#A61F24] transition-colors"
+                    >
+                      <Download className="w-3 h-3 text-white" />
+                      <span>Proceed to Downloads →</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* SCREEN 4: STEP 04 - FULL QUALITY DOWNLOAD & SAVE */}
+                {activeStep === 3 && (
+                  <div className="space-y-3.5 animate-in fade-in duration-300 text-center">
+                    <div className="w-12 h-12 rounded-full bg-[#43866A]/15 text-[#43866A] flex items-center justify-center mx-auto mt-2 ring-4 ring-[#43866A]/10">
+                      <CheckCircle2 className="w-6 h-6" />
+                    </div>
+
+                    <div className="space-y-1">
+                      <h5 className="text-xs font-bold text-[#202020]">38 Photos Ready to Save</h5>
+                      <p className="text-[10px] text-[#666666]">Original 300 DPI master clarity preserved</p>
+                    </div>
+
+                    <div className="p-3 bg-[#F7F7F7] rounded-xl border border-[#E8E8E8] text-left text-[10px] space-y-1.5">
+                      <div className="flex justify-between font-semibold text-[#202020]">
+                        <span>Destination:</span>
+                        <span className="text-[#C62828]">Phone Photos / Cloud</span>
+                      </div>
+                      <div className="flex justify-between text-[#666666]">
+                        <span>Format:</span>
+                        <span>Lossless High-Res JPEG</span>
+                      </div>
+                      <div className="flex justify-between text-[#666666]">
+                        <span>Download Size:</span>
+                        <span>Full Resolution (Zip)</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onOpenAuthModal && onOpenAuthModal('signup')}
+                      className="w-full py-2.5 bg-[#C62828] text-white text-[10px] font-semibold rounded-lg flex items-center justify-center gap-2 shadow-xs cursor-pointer hover:bg-[#A61F24] transition-colors"
+                    >
+                      <Download className="w-3.5 h-3.5 text-white" />
+                      <span>Download All 38 Photos</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleSelectStep(0)}
+                      className="text-[10px] text-[#666666] hover:text-[#C62828] underline cursor-pointer transition-colors"
+                    >
+                      Restart Walkthrough
+                    </button>
+                  </div>
+                )}
+
+                {/* Bottom Screen Switcher Controls */}
+                <div className="pt-2 border-t border-[#E8E8E8] flex items-center justify-between text-[10px] text-[#666666]">
+                  <span className="font-medium">Screen {activeStep + 1} of 4</span>
+                  
+                  <div className="flex items-center gap-1.5">
+                    {[0, 1, 2, 3].map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => handleSelectStep(s)}
+                        className={`h-2 rounded-full cursor-pointer transition-all duration-300 ${
+                          activeStep === s ? 'w-4 bg-[#C62828]' : 'w-2 bg-[#E8E8E8] hover:bg-[#D4D4D4]'
+                        }`}
+                        aria-label={`Show screen ${s + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </AndroidDeviceFrame>
+          </div>
+
+          {/* RIGHT: INTERACTIVE 4-STEP JOURNEY WITH AUTOMATIC 4-SECOND PROGRESS */}
+          <div className="lg:col-span-4 space-y-2.5 text-left">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#666666] block">
+                GUEST EXPERIENCE (CLICK TO PREVIEW)
+              </span>
+
+              {/* Status indicator */}
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFF5F5] border border-[#FCEBEC] text-[10px] font-semibold text-[#C62828]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#43866A] animate-pulse" />
+                <span>Auto-play 4s</span>
+              </div>
             </div>
 
-            {stages.map((st, idx) => {
-              const Icon = st.icon;
-              const isActive = activeStage === idx;
+            {guestSteps.map((step) => {
+              const isCurrent = activeStep === step.screenIndex;
 
               return (
                 <div
-                  key={st.step}
-                  onClick={() => setActiveStage(idx)}
-                  className={`gsap-stagger-item relative p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${isActive
-                    ? 'bg-white border-[#202522] shadow-[0_10px_30px_-10px_rgba(32,37,34,0.08)] ring-1 ring-[#202522]'
-                    : 'bg-white/60 hover:bg-white border-[#E8EBE7] hover:border-[#CBD5E1]'
-                    }`}
+                  key={step.num}
+                  onClick={() => handleSelectStep(step.screenIndex)}
+                  className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer ${
+                    isCurrent
+                      ? 'bg-[#FFF5F5]/70 border-[#C62828] shadow-xs ring-1 ring-[#C62828]'
+                      : 'bg-white hover:bg-[#F7F7F7] border-[#E8E8E8]'
+                  }`}
                 >
-                  <div className="flex items-start gap-4">
-                    {/* Step Badge with active indicator */}
-                    <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-bold transition-colors ${isActive
-                        ? 'bg-[#202522] text-white'
-                        : 'bg-[#F7F8F6] text-[#737873] border border-[#E8EBE7]'
-                        }`}
+                  <div className="flex items-start gap-3">
+                    <span
+                      className={`text-xs font-bold font-serif shrink-0 mt-0.5 ${
+                        isCurrent ? 'text-[#C62828]' : 'text-[#888888]'
+                      }`}
                     >
-                      {st.step}
-                    </div>
+                      {step.num}
+                    </span>
 
-                    <div className="space-y-1 flex-1">
+                    <div className="space-y-0.5 flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold tracking-wider uppercase text-[#648B72]">
-                          {st.phase}
-                        </span>
-                        {isActive && (
-                          <span className="flex items-center gap-1 text-[10px] font-semibold text-[#202522]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#648B72] animate-pulse"></span>
-                            Active
-                          </span>
+                        <h4 className="text-xs font-bold text-[#202020]">{step.title}</h4>
+                        {isCurrent && (
+                          <span className="text-[10px] font-semibold text-[#C62828]">Active</span>
                         )}
                       </div>
+                      <p className="text-[11px] text-[#666666] leading-relaxed">{step.description}</p>
 
-                      <h4 className="text-sm font-bold text-[#202522]">
-                        {st.title}
-                      </h4>
-
-                      <p className="text-xs text-[#737873] leading-relaxed">
-                        {st.description}
-                      </p>
+                      {/* 4-Second Animated Progress Bar for Active Step */}
+                      <div className="w-full bg-[#E8E8E8]/80 h-1 rounded-full mt-2.5 overflow-hidden">
+                        {isCurrent ? (
+                          <div
+                            key={activeStep}
+                            className="h-full bg-[#C62828] rounded-full animate-step-progress"
+                          />
+                        ) : (
+                          <div className="h-full w-0" />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })}
-          </div>
 
-          {/* RIGHT: INTERACTIVE DEMONSTRATION WORKSPACE */}
-          <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl border border-[#E8EBE7] p-5 sm:p-7 soft-elevated-shadow relative min-h-[510px] flex flex-col justify-between">
-
-              {/* Demonstration Header Bar */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#E8EBE7] text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-[#202522]">
-                    Stage {activeStage + 1} of 4: {stages[activeStage].title}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  {[0, 1, 2, 3].map((stepIdx) => (
-                    <button
-                      key={stepIdx}
-                      onClick={() => setActiveStage(stepIdx)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${activeStage === stepIdx
-                        ? 'w-7 bg-[#202522]'
-                        : 'bg-[#E8EBE7] hover:bg-[#CBD5E1]'
-                        }`}
-                      aria-label={`Go to stage ${stepIdx + 1}`}
-                    />
-                  ))}
-                </div>
+            {/* Privacy & Standee Action */}
+            <div className="pt-3 space-y-3">
+              <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-[#F7F7F7] border border-[#E8E8E8] text-[11px] text-[#666666]">
+                <ShieldCheck className="w-4 h-4 text-[#C62828] shrink-0 mt-0.5" />
+                <span>Selfies are encrypted and used strictly for event photo matching.</span>
               </div>
 
-              {/* DYNAMIC STAGE CONTENT AREA */}
-              <div className="py-5 flex-1 flex flex-col justify-center">
-
-                {/* ---------------------------------------------------- */}
-                {/* STAGE 0: EVENT UPLOAD */}
-                {/* ---------------------------------------------------- */}
-                {activeStage === 0 && (
-                  <div className="space-y-4 animate-in fade-in duration-200">
-                    <div className="border-2 border-dashed border-[#E8EBE7] rounded-2xl p-6 bg-[#FAFBF9] text-center space-y-2">
-                      <div className="w-12 h-12 rounded-xl bg-white border border-[#E8EBE7] flex items-center justify-center mx-auto text-[#648B72] shadow-xs">
-                        <UploadCloud className="w-6 h-6" />
-                      </div>
-                      <h5 className="text-sm font-bold text-[#202522]">Uploading Master Event Photographs</h5>
-                      <p className="text-xs text-[#737873]">Parallel ingestion for bulk high-resolution event shots</p>
-
-                      <div className="max-w-xs mx-auto pt-2 space-y-1">
-                        <div className="flex justify-between text-[11px] font-semibold text-[#202522]">
-                          <span>Folder: Udaipur_Sangeet_RAW/</span>
-                          <span className="text-[#648B72]">1,420 / 2,840</span>
-                        </div>
-                        <div className="w-full bg-[#E8EBE7] h-2 rounded-full overflow-hidden">
-                          <div className="bg-[#202522] h-full w-[50%] rounded-full transition-all duration-500"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-4 gap-2.5 pt-1">
-                      {samplePhotos.gallery.slice(0, 4).map((p, i) => (
-                        <div key={i} className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#E8EBE7] bg-[#F7F8F6]">
-                          <img src={p.url} alt="Uploaded thumbnail" className="w-full h-full object-cover" />
-                          <span className="absolute top-1 right-1 bg-white/90 text-[8px] font-bold text-[#202522] px-1 rounded shadow-xs">
-                            RAW
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* ---------------------------------------------------- */}
-                {/* STAGE 1: GUEST SELFIE ON AUTHENTIC ANDROID PHONE */}
-                {/* ---------------------------------------------------- */}
-                {activeStage === 1 && (
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-in fade-in duration-200">
-                    <AndroidDeviceFrame className="w-64 sm:w-[260px]" time="9:41">
-                      <div className="p-4 space-y-3 bg-white text-left">
-                        <div className="flex items-center justify-between pb-2 border-b border-[#E8EBE7]">
-                          <span className="text-xs font-bold text-[#202522]">Selfie Verification</span>
-                          <span className="text-[9px] text-[#648B72] font-semibold bg-[#648B72]/15 px-2 py-0.5 rounded-full">
-                            Camera Active
-                          </span>
-                        </div>
-
-                        {/* Selfie Preview Screen */}
-                        <div className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-[#E8EBE7] bg-[#FAFBF9]">
-                          <img
-                            src={samplePhotos.aiMatchingDemo.guestSelfie}
-                            alt="Guest selfie capture"
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-x-3 bottom-3 bg-white/95 backdrop-blur-xs p-2 rounded-xl border border-[#E8EBE7] text-center">
-                            <p className="text-[10px] font-bold text-[#202522]">Portrait Captured</p>
-                            <p className="text-[9px] text-[#737873]">Zero app download required</p>
-                          </div>
-                        </div>
-
-                        <button
-                          onClick={() => setActiveStage(2)}
-                          className="w-full py-2 bg-[#202522] text-white text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow-xs"
-                        >
-                          <span>Discover My Photos</span>
-                          <ArrowRight className="w-3 h-3 text-[#E8EBE7]" />
-                        </button>
-                      </div>
-                    </AndroidDeviceFrame>
-
-                    <div className="max-w-xs space-y-2 text-left">
-                      <span className="text-[10px] font-bold text-[#648B72] uppercase tracking-wider">Browser Simplicity</span>
-                      <h5 className="text-sm font-bold text-[#202522]">No App Download Required</h5>
-                      <p className="text-xs text-[#737873] leading-relaxed">
-                        Guests open the link directly in their native smartphone browser, grant 1-time camera permission, and take a quick portrait.
-                      </p>
-                      <button
-                        onClick={() => setActiveStage(2)}
-                        className="text-xs font-bold text-[#648B72] hover:underline pt-1 inline-flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>Next: Run Match Simulation</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* ---------------------------------------------------- */}
-                {/* STAGE 2: INTELLIGENT MATCHING */}
-                {/* ---------------------------------------------------- */}
-                {activeStage === 2 && (
-                  <div className="space-y-4 animate-in fade-in duration-200">
-                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-[#FAFBF9] p-4 rounded-2xl border border-[#E8EBE7]">
-
-                      {/* Reference Selfie */}
-                      <div className="sm:col-span-4 text-center p-3 bg-white rounded-xl border border-[#E8EBE7] shadow-xs">
-                        <img
-                          src={samplePhotos.aiMatchingDemo.guestSelfie}
-                          alt="Selfie"
-                          className="w-20 h-20 rounded-xl mx-auto object-cover border border-[#648B72] mb-1.5"
-                        />
-                        <p className="text-xs font-bold text-[#202522]">{samplePhotos.aiMatchingDemo.guestName}</p>
-                        <p className="text-[10px] text-[#737873]">Reference Portrait</p>
-                      </div>
-
-                      <div className="sm:col-span-1 hidden sm:flex justify-center text-[#648B72]">
-                        <ArrowRight className="w-5 h-5 text-[#648B72]" />
-                      </div>
-
-                      {/* Matching Target Photos */}
-                      <div className="sm:col-span-7 space-y-2">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-[#202522]">Event Stream Comparison</span>
-                          <span className="text-[#648B72] font-semibold text-[11px]">38 Matches Identified</span>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-2">
-                          {samplePhotos.aiMatchingDemo.matchedPhotos.slice(0, 3).map((match, i) => (
-                            <div key={i} className="relative rounded-lg overflow-hidden aspect-square border-2 border-[#648B72] shadow-xs">
-                              <img src={match.url} alt="Match" className="w-full h-full object-cover" />
-                              <div className="absolute top-1 right-1 bg-white text-[#202522] text-[8px] font-bold px-1 rounded shadow-xs">
-                                {match.confidence}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <div className="p-3 bg-white rounded-xl border border-[#E8EBE7] flex items-center justify-between text-xs text-[#737873]">
-                      <span>Facial landmarks accurately mapped across varied lighting and candid angles.</span>
-                      <button
-                        onClick={() => setActiveStage(3)}
-                        className="text-[#202522] font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>Open Personal Gallery</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* ---------------------------------------------------- */}
-                {/* STAGE 3: PERSONAL GALLERY */}
-                {/* ---------------------------------------------------- */}
-                {activeStage === 3 && (
-                  <div className="space-y-4 animate-in fade-in duration-200">
-                    <div className="flex items-center justify-between pb-2 border-b border-[#E8EBE7]">
-                      <div>
-                        <h5 className="text-xs font-bold text-[#202522]">Ananya’s Curated Event Moments</h5>
-                        <p className="text-[11px] text-[#737873]">38 High-Resolution Photographs ready to save</p>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => onOpenAuthModal('signup')}
-                          className="px-3 py-1.5 bg-[#202522] text-white text-xs font-semibold rounded-lg hover:bg-[#333A36] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
-                        >
-                          <Download className="w-3.5 h-3.5" />
-                          <span>Download All (HD)</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Personal Matched Masonry Preview */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                      {samplePhotos.aiMatchingDemo.matchedPhotos.map((p, idx) => (
-                        <div
-                          key={idx}
-                          onClick={() => onOpenImageModal && onOpenImageModal(p)}
-                          className="group relative rounded-xl overflow-hidden aspect-square border border-[#E8EBE7] bg-[#F7F8F6] cursor-pointer"
-                        >
-                          <img src={p.url} alt="Photo" className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-end text-white text-[10px]">
-                            <span className="font-semibold">{p.tag}</span>
-                            <span className="text-[9px] text-slate-300">{p.time}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <p className="text-center text-xs text-[#737873] pt-1">
-                      Photographs preserve full EXIF data and original camera sensor clarity.
-                    </p>
-                  </div>
-                )}
-
-              </div>
-
-              {/* 3. SUBTLE PRIVACY AND TRUST NOTE */}
-              <div className="pt-3 border-t border-[#E8EBE7] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-[#737873]">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#648B72]" />
-                  <span>Your selfies are used for photo matching and handled according to the platform's privacy policy.</span>
-                </div>
-                <button
-                  onClick={() => onOpenAuthModal('signup')}
-                  className="font-semibold text-[#202522] hover:text-[#648B72] transition-colors cursor-pointer"
-                >
-                  Start Discovery Free →
-                </button>
-              </div>
-
+              <button
+                onClick={() => onOpenAuthModal && onOpenAuthModal('signup')}
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#C62828] text-white text-xs font-semibold hover:bg-[#A61F24] transition-all shadow-xs cursor-pointer group"
+              >
+                <Download className="w-3.5 h-3.5 text-white" />
+                <span>Get Print Standee Templates</span>
+                <ArrowRight className="w-3.5 h-3.5 text-white/90 transform transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

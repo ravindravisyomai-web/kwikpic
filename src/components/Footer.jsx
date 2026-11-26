@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, ArrowRight, Mail } from 'lucide-react';
+import { ArrowUp, ArrowRight, Mail, Camera } from 'lucide-react';
 
 export default function Footer({ onOpenAuthModal }) {
   const scrollToTop = () => {
@@ -8,20 +8,39 @@ export default function Footer({ onOpenAuthModal }) {
   };
 
   return (
-    <footer className="bg-[#000000] text-[#8E8E93] text-xs pt-16 sm:pt-24 pb-14 overflow-hidden relative border-t border-[#161618]">
-      
-      {/* 1. HUGE CINEMATIC 3D EMBOSSED LUMINA LOGO */}
+    <footer className="bg-[#000000] text-[#888888] text-xs pt-16 sm:pt-24 pb-14 overflow-hidden relative border-t border-[#161618]">
+
+      {/* 1. HUGE CINEMATIC RED EMBOSSED LUMINA WORDMARK */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 select-none relative">
-        <div className="w-full flex items-center justify-center overflow-hidden py-2">
-          <img
-            src="/images/lumina-embossed-logo.png"
-            alt="Lumina"
-            className="w-full max-w-[850px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] opacity-95 transition-opacity duration-300 hover:opacity-100"
-          />
+        {/* Subtle crimson ambient glow behind wordmark */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 58% 60% at 50% 48%, rgba(198, 40, 40, 0.22) 0%, rgba(166, 31, 36, 0.08) 48%, transparent 75%)',
+          }}
+        />
+
+        <div className="w-full flex items-center justify-center overflow-hidden py-3 relative z-10">
+          <div
+            aria-label="Lumina"
+            className="text-[clamp(4.25rem,17vw,12rem)] font-extrabold tracking-[-0.045em] leading-[0.95] text-center select-none transition-transform duration-500 hover:scale-[1.01]"
+            style={{
+              backgroundImage:
+                'linear-gradient(180deg, #FF7A7A 0%, #E53935 28%, #C62828 60%, #6E1014 88%, #2B0507 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              WebkitTextStroke: '1px rgba(255, 138, 138, 0.28)',
+              filter: 'drop-shadow(0 18px 36px rgba(198, 40, 40, 0.32))',
+            }}
+          >
+            Lumina<span style={{ color: '#E53935', WebkitTextStroke: '0px' }}>.</span>
+          </div>
         </div>
 
-        {/* Subtle horizontal gradient divider line under brand */}
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#242426] to-transparent mt-6" />
+        {/* Subtle horizontal crimson gradient divider line under brand */}
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C62828]/45 to-transparent mt-6" />
       </div>
 
       {/* 2. STRUCTURED MULTI-COLUMN CONTENT */}
@@ -30,32 +49,37 @@ export default function Footer({ onOpenAuthModal }) {
 
           {/* Left Column: Brand Statement, Live Status & Social Icons */}
           <div className="md:col-span-4 space-y-6">
-            
-            <div className="space-y-2 text-xs text-[#8E8E93] leading-relaxed max-w-sm">
-              <p className="text-white font-semibold text-sm">
-                Lumina<span className="text-[#648B72]">.</span>
-              </p>
+
+            <div className="space-y-3 text-xs text-[#888888] leading-relaxed max-w-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-md bg-[#C62828] flex items-center justify-center text-white shadow-xs">
+                  <Camera className="w-3.5 h-3.5 text-white" />
+                </div>
+                <p className="text-white font-bold text-sm tracking-tight">
+                  Lumina<span className="text-[#E53935]">.</span>
+                </p>
+              </div>
               <p>
                 AI-powered event photo sharing and instant facial recognition discovery. Empowering professional photographers, studios, and organizers to deliver high-resolution memories seamlessly.
               </p>
             </div>
 
-            {/* "All systems normal" Live Status Pill */}
+            {/* "All systems normal" Semantic Live Status Pill */}
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#111113] border border-[#222226] text-[#A0A0A5] text-[11px] font-medium shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#30D158] animate-pulse shadow-[0_0_8px_rgba(48,209,88,0.7)]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#43866A] animate-pulse shadow-[0_0_8px_rgba(67,134,106,0.7)]"></span>
                 <span>All systems normal</span>
               </div>
             </div>
 
             {/* Rounded Social Icon Buttons */}
-            <div className="flex items-center gap-2.5 pt-1 text-[#8E8E93]">
+            <div className="flex items-center gap-2.5 pt-1 text-[#888888]">
               {/* Instagram */}
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#3E3E44] transition-all cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#C62828]/70 transition-all cursor-pointer"
                 aria-label="Instagram"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -68,7 +92,7 @@ export default function Footer({ onOpenAuthModal }) {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#3E3E44] transition-all cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#C62828]/70 transition-all cursor-pointer"
                 aria-label="Twitter / X"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -81,7 +105,7 @@ export default function Footer({ onOpenAuthModal }) {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#3E3E44] transition-all cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#C62828]/70 transition-all cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -94,7 +118,7 @@ export default function Footer({ onOpenAuthModal }) {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#3E3E44] transition-all cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-[#111113] border border-[#222226] flex items-center justify-center hover:text-white hover:border-[#C62828]/70 transition-all cursor-pointer"
                 aria-label="GitHub"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -111,19 +135,19 @@ export default function Footer({ onOpenAuthModal }) {
             {/* Column 1: Solutions by Industry */}
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Solutions</h4>
-              <ul className="space-y-2.5 text-xs text-[#8E8E93]">
+              <ul className="space-y-2.5 text-xs text-[#888888]">
                 <li><Link to="/solutions/photographers" className="hover:text-white transition-colors">Photographers & Studios</Link></li>
                 <li><Link to="/solutions/wedding-studios" className="hover:text-white transition-colors">Wedding Professionals</Link></li>
                 <li><Link to="/solutions/corporate" className="hover:text-white transition-colors">Corporate Teams</Link></li>
                 <li><Link to="/solutions/education" className="hover:text-white transition-colors">Schools & Colleges</Link></li>
-                <li><Link to="/solutions" className="text-[#648B72] hover:text-[#7fa38c] transition-colors flex items-center gap-1 font-medium"><span>All Solutions</span><ArrowRight className="w-3 h-3" /></Link></li>
+                <li><Link to="/solutions" className="text-[#E05252] hover:text-white transition-colors flex items-center gap-1 font-medium"><span>All Solutions</span><ArrowRight className="w-3 h-3" /></Link></li>
               </ul>
             </div>
 
             {/* Column 2: Event Use Cases */}
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Use Cases</h4>
-              <ul className="space-y-2.5 text-xs text-[#8E8E93]">
+              <ul className="space-y-2.5 text-xs text-[#888888]">
                 <li><Link to="/use-cases/weddings" className="hover:text-white transition-colors">Weddings & Ceremonies</Link></li>
                 <li><Link to="/use-cases/celebrations" className="hover:text-white transition-colors">Birthdays & Parties</Link></li>
                 <li><Link to="/use-cases/corporate-events" className="hover:text-white transition-colors">Conferences & Summits</Link></li>
@@ -135,32 +159,31 @@ export default function Footer({ onOpenAuthModal }) {
             {/* Column 3: Platform & Features */}
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Platform</h4>
-              <ul className="space-y-2.5 text-xs text-[#8E8E93]">
+              <ul className="space-y-2.5 text-xs text-[#888888]">
                 <li><a href="/#features" className="hover:text-white transition-colors">Product Showcase</a></li>
                 <li><a href="/#how-it-works" className="hover:text-white transition-colors">How It Works</a></li>
                 <li><a href="/#ai-matching" className="hover:text-white transition-colors">AI Face Recognition</a></li>
                 <li><a href="/#pricing" className="hover:text-white transition-colors">Pricing Plans</a></li>
-                <li><a href="/#testimonials" className="hover:text-white transition-colors">Customer Reviews</a></li>
               </ul>
             </div>
 
             {/* Column 4: Support & Access */}
             <div className="space-y-3.5 gsap-stagger-item">
               <h4 className="font-semibold text-white text-xs tracking-tight">Support</h4>
-              <ul className="space-y-2.5 text-xs text-[#8E8E93]">
+              <ul className="space-y-2.5 text-xs text-[#888888]">
                 <li><a href="/#faq" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="mailto:support@lumina.ai" className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-[#648B72]" /><span>Contact Support</span></a></li>
+                <li><a href="mailto:support@lumina.ai" className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-[#E05252]" /><span>Contact Support</span></a></li>
                 <li>
                   <button onClick={() => onOpenAuthModal && onOpenAuthModal('login')} className="hover:text-white transition-colors cursor-pointer text-left">
                     Studio Sign In
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onOpenAuthModal && onOpenAuthModal('signup')} className="text-[#648B72] hover:text-[#7fa38c] transition-colors cursor-pointer text-left font-medium">
+                  <button onClick={() => onOpenAuthModal && onOpenAuthModal('signup')} className="text-[#E05252] hover:text-white transition-colors cursor-pointer text-left font-medium">
                     Create Free Account
                   </button>
                 </li>
-                <li><span className="text-[#636366]">Privacy & GDPR Compliant</span></li>
+                <li><span className="text-[#666666]">Privacy & GDPR Compliant</span></li>
               </ul>
             </div>
 
@@ -169,8 +192,8 @@ export default function Footer({ onOpenAuthModal }) {
         </div>
 
         {/* 3. BOTTOM BAR: Copyright & Back to top button */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#636366]">
-          
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
+
           <div className="flex flex-wrap items-center gap-3">
             <span>© {new Date().getFullYear()} Lumina Technologies Inc. All rights reserved.</span>
             <span className="hidden sm:inline">•</span>
@@ -179,7 +202,7 @@ export default function Footer({ onOpenAuthModal }) {
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[#8E8E93] hover:text-white transition-colors cursor-pointer py-1 px-2 rounded-md hover:bg-[#111113]"
+            className="flex items-center gap-1.5 text-[#888888] hover:text-white transition-colors cursor-pointer py-1 px-2 rounded-md hover:bg-[#111113]"
             aria-label="Back to top"
           >
             <span>Back to top</span>
